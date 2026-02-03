@@ -185,8 +185,8 @@ export default function InsightsPage() {
             <div className="md:col-span-3 space-y-8">
               <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
                 These insights emerge from years of working with leaders navigating 
-                complex challenges. Each piece reflects patterns we've observed, 
-                frameworks we've found useful, and questions worth asking.
+                complex challenges. Each piece reflects patterns we&#39;ve observed, 
+                frameworks we&#39;ve found useful, and questions worth asking.
               </p>
               <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
                 We write for leaders who value clear thinking over buzzwords, practical 
@@ -233,7 +233,7 @@ export default function InsightsPage() {
       {/* CTA Section */}
       <section className="relative py-40 scroll-reveal overflow-hidden bg-brand">
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-125 h-[500px] bg-white/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl" />
         </div>
 
@@ -249,7 +249,7 @@ export default function InsightsPage() {
           </h2>
           
           <p className="font-body text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto">
-            If these perspectives resonate with what you're navigating, let's explore how we can help.
+            If these perspectives resonate with what you&#39;re navigating, let&#39;s explore how we can help.
           </p>
           
           <Link
@@ -289,7 +289,7 @@ function InsightCard({ post, index }) {
                 {post.excerpt}
               </p>
             </div>
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <div className="w-10 h-10 rounded-full bg-warm-white group-hover:bg-brand transition-colors flex items-center justify-center">
                 <svg className="w-5 h-5 text-brand group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
