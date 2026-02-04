@@ -1,34 +1,29 @@
-import PageWrapper from "@/components/layout/PageWrapper";
-
-export default function ContactPage() {
+export default function AboutPage() {
   return (
-    <PageWrapper
-      title="Book a Consultation"
-      intro="Schedule a confidential consultation to discuss your needs and explore how we can support you."
-    >
-      <div className="max-w-xl space-y-6">
-        <p className="text-muted-foreground leading-7">
-          Consultations are available by appointment. Once confirmed,
-          you will receive calendar details and next steps.
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="max-w-md w-full text-center bg-white rounded-2xl shadow-lg p-8">
+        
+        <div className="flex justify-center mb-6">
+          <div className="h-16 w-16 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-600 text-3xl">
+            🚧
+          </div>
+        </div>
+
+        <h1 className="text-2xl font-semibold text-gray-900 mb-3">
+          Page Under Construction
+        </h1>
+
+        <p className="text-gray-600 mb-6">
+          We’re working on this page and will be live soon.
+          <br />
+          Thanks for your patience.
         </p>
 
-        <div className="rounded-2xl border p-8">
-          <p className="font-medium mb-2">Contact</p>
-          <p className="text-muted-foreground">
-            Email: info@truenorthadvisory.com
-          </p>
-        </div>
+        <span className="text-sm text-gray-400">
+          © 2026 Abelilunga.com
+        </span>
 
-        <div className="rounded-2xl bg-muted p-8">
-          <p className="font-medium mb-2">
-            Booking integration
-          </p>
-          <p className="text-muted-foreground">
-            Calendar booking will be enabled once the scheduling
-            system is connected.
-          </p>
-        </div>
       </div>
-    </PageWrapper>
+    </div>
   );
 }
