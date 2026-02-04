@@ -171,7 +171,7 @@ export default function HomePage() {
       <section className="relative bg-white overflow-hidden">
         <div className="grid lg:grid-cols-2 min-h-screen max-w-none">
           {/* Left Column - Content */}
-          <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 xl:px-24 py-16 lg:py-20 order-2 lg:order-1">
+          <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 xl:px-24 py-16 lg:py-20 order-1 lg:order-1">
             <div className="max-w-xl mx-auto lg:mx-0 lg:ml-auto">
               {/* Tag */}
               <div className="animate-slideDown mb-4" style={{ animationDelay: "0.1s" }}>
@@ -235,7 +235,7 @@ export default function HomePage() {
           </div>
 
           {/* Right Column - Image */}
-          <div className="relative h-[50vh] sm:h-[60vh] lg:h-auto order-1 lg:order-2">
+          <div className="relative h-[50vh] sm:h-[60vh] lg:h-auto order-2 lg:order-2">
             <div className="relative w-full h-full overflow-hidden">
               <div 
                 className="parallax-image absolute inset-0 w-full h-full"
