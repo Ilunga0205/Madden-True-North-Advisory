@@ -181,7 +181,7 @@ export default function HomePage() {
                 {/* Description */}
                 <div className="animate-fadeInUp mb-8" style={{ animationDelay: "0.3s" }}>
                   <p className="font-body text-base md:text-lg text-stone-700 leading-relaxed">
-                    True North Advisory provides senior leaders with strategic counsel, 
+                    Madden True North Advisory provides senior leaders with strategic counsel, 
                     governance design, and the independent perspective needed to make 
                     confident decisions in uncertain environments.
                   </p>
