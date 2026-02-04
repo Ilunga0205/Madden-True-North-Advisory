@@ -1,280 +1,203 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function HomePage() {
+export default function UnderConstruction() {
+  const [mounted, setMounted] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll(".scroll-reveal").forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    setMounted(true);
   }, []);
 
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+    setShowEmailModal(true);
+  };
+
+  const closeModal = () => {
+    setShowEmailModal(false);
+  };
+
   return (
-    <main>
-      {/* ---------------- HERO ---------------- */}
-<section className="relative min-h-screen border-b overflow-hidden bg-neutral-50">
-  <div className="max-w-7xl mx-auto px-6 h-screen">
-    <div className="grid lg:grid-cols-2 h-full items-center gap-20">
-      
-      {/* Left content */}
-      <div className="flex flex-col justify-center">
-        <div className="animate-fadeInUp">
-          <span className="inline-block text-sm uppercase tracking-wide text-neutral-500 mb-4">
-            Advisory Services
-          </span>
+    <>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
 
-          <h1 className="text-5xl md:text-6xl xl:text-7xl font-medium tracking-tight mb-8">
-            Strategic clarity for complex decisions
-          </h1>
-        </div>
+          .font-display {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.02em;
+            font-weight: 600;
+          }
 
-        <div
-          className="animate-fadeInUp"
-          style={{ animationDelay: "0.2s" }}
-        >
-          <p className="text-xl text-neutral-600 leading-relaxed max-w-xl mb-10">
-            True North Advisory supports leaders and organisations in navigating
-            complexity through clear strategy, governance, and insight.
-          </p>
-        </div>
+          .font-body {
+            font-family: 'Montserrat', sans-serif;
+          }
 
-        <div
-          className="animate-fadeInUp flex items-center gap-6"
-          style={{ animationDelay: "0.4s" }}
-        >
-          <Link
-            href="/contact"
-            className="bg-black text-white px-8 py-4 rounded-md hover:bg-neutral-800 transition-colors"
-          >
-            Book a consultation
-          </Link>
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(40px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
 
-          <span className="text-sm text-neutral-500">
-            Trusted by senior leaders
-          </span>
-        </div>
-      </div>
+          @keyframes pulse {
+            0%, 100% {
+              opacity: 1;
+            }
+            50% {
+              opacity: 0.5;
+            }
+          }
 
-      {/* Right image */}
-      <div
-        className="hidden lg:flex justify-end items-center h-full animate-fadeInUp"
-        style={{ animationDelay: "0.3s" }}
-      >
-        <div className="relative h-[85%] w-full max-w-xl">
-          <Image
-            src="/images/hero-advisory.jpg"
-            alt="Executive advisory portrait"
-            fill
-            priority
-            className="object-cover rounded-2xl"
-          />
-        </div>
-      </div>
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
 
-    </div>
-  </div>
-</section>
+          @keyframes scaleIn {
+            from {
+              opacity: 0;
+              transform: scale(0.95);
+            }
+            to {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
 
-
-      {/* ---------------- VALUE ---------------- */}
-      <section className="py-20 md:py-32 scroll-reveal">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-12">
-            <ValueItem
-              title="Clarity"
-              text="Helping leaders define direction when complexity obscures decision-making."
-            />
-            <ValueItem
-              title="Structure"
-              text="Designing governance and strategic frameworks that support execution."
-            />
-            <ValueItem
-              title="Perspective"
-              text="Independent advisory insight grounded in experience and analysis."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- SERVICES ---------------- */}
-      <section className="bg-neutral-50 py-20 md:py-32 scroll-reveal">
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionHeader title="Services" link="/services" />
-
-          <div className="grid md:grid-cols-3 gap-6 mt-10">
-            <ServiceCard
-              title="Strategic Advisory"
-              image="/images/service-strategy.jpg"
-            />
-            <ServiceCard
-              title="Governance & Structure"
-              image="/images/service-governance.jpg"
-            />
-            <ServiceCard
-              title="Organisational Alignment"
-              image="/images/service-alignment.jpg"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- OFFERS ---------------- */}
-      <section className="py-20 md:py-32 scroll-reveal">
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionHeader title="Offers" link="/offers" />
-
-          <div className="grid md:grid-cols-2 gap-6 mt-10">
-            <PreviewCard title="Executive Advisory" />
-            <PreviewCard title="Strategic Review" />
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- INSIGHTS ---------------- */}
-      <section className="bg-neutral-50 py-20 md:py-32 scroll-reveal">
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionHeader title="Insights" link="/insights" />
-
-          <div className="max-w-3xl space-y-8 mt-10">
-            <InsightPreview
-              title="Navigating Complexity in Leadership"
-              date="January 2026"
-            />
-            <InsightPreview
-              title="Strategy vs Execution"
-              date="December 2025"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- CTA ---------------- */}
-      <section className="relative text-white py-24 md:py-32 scroll-reveal">
-        <Image
-          src="/images/cta-advisory.jpg"
-          alt="Advisory consultation"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-
-        <div className="relative max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-medium mb-8 max-w-2xl">
-            Let’s discuss your next step
-          </h2>
-          <Link
-            href="/contact"
-            className="inline-block bg-white text-black px-8 py-4 rounded-md hover:bg-neutral-100 transition-colors"
-          >
-            Book a consultation
-          </Link>
-        </div>
-      </section>
-
-      {/* ---------------- ANIMATIONS ---------------- */}
-      <style jsx global>{`
-        @keyframes fadeInUp {
-          from {
+          .animate-fadeInUp {
             opacity: 0;
-            transform: translateY(30px);
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+
+          .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
           }
-        }
 
-        .animate-fadeInUp {
-          opacity: 0;
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
+          .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+          }
 
-        .scroll-reveal {
-          opacity: 0;
-          transform: translateY(40px);
-          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+          .animate-scaleIn {
+            animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          }
 
-        .scroll-reveal.revealed {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `}</style>
-    </main>
-  );
-}
+          .bg-brand {
+            background-color: #8FA89A;
+          }
 
-/* ---------------- COMPONENTS ---------------- */
+          .text-brand {
+            color: #8FA89A;
+          }
 
-function ValueItem({ title, text }) {
-  return (
-    <div>
-      <h3 className="text-lg font-medium mb-3">{title}</h3>
-      <p className="text-neutral-600 leading-relaxed">{text}</p>
-    </div>
-  );
-}
+          .bg-brand-light {
+            background-color: rgba(143, 168, 154, 0.1);
+          }
 
-function SectionHeader({ title, link }) {
-  return (
-    <div className="flex items-center justify-between mb-2">
-      <h2 className="text-3xl font-medium">{title}</h2>
-      <Link
-        href={link}
-        className="text-sm text-neutral-600 hover:text-black transition-colors"
-      >
-        View all →
-      </Link>
-    </div>
-  );
-}
+          .border-brand {
+            border-color: #8FA89A;
+          }
 
-function ServiceCard({ title, image }) {
-  return (
-    <div className="bg-white border rounded-lg overflow-hidden hover:border-neutral-400 transition-colors">
-      <div className="relative h-44">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <div className="p-8">
-        <h3 className="font-medium">{title}</h3>
-      </div>
-    </div>
-  );
-}
+          .text-charcoal {
+            color: #1F1F1F;
+          }
+        `
+      }} />
 
-function PreviewCard({ title }) {
-  return (
-    <div className="bg-white border border-neutral-200 rounded-lg p-10 hover:border-neutral-400 transition-colors">
-      <h3 className="font-medium">{title}</h3>
-    </div>
-  );
-}
+      {showEmailModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 animate-fadeIn" onClick={closeModal}>
+          <div className="absolute inset-0 bg-black bg-opacity-50" />
+          <div className="relative bg-white rounded-lg shadow-2xl max-w-md w-full p-8 animate-scaleIn" onClick={(e) => e.stopPropagation()}>
+            <button onClick={closeModal} className="absolute top-4 right-4 text-stone-400 hover:text-stone-600 transition-colors">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              
+              <h3 className="font-display text-2xl text-charcoal mb-2">Get in touch</h3>
+              <p className="font-body text-stone-600 mb-6">Feel free to reach out to us at:</p>
+              
+              <div className="bg-brand-light rounded-lg p-4 mb-6">
+                <a href="mailto:maddentruenorthadvisory@gmail.com" className="font-body font-semibold text-brand hover:underline">
+                  maddentruenorthadvisory@gmail.com
+                </a>
+              </div>
+              
+              <button onClick={closeModal} className="w-full bg-brand text-white font-body font-semibold py-3 rounded-lg hover:bg-opacity-90 transition-all">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
-function InsightPreview({ title, date }) {
-  return (
-    <div className="border-b border-neutral-200 pb-8">
-      <p className="text-sm text-neutral-500 mb-2">{date}</p>
-      <p className="text-xl font-medium">{title}</p>
-    </div>
+      <main className="min-h-screen bg-white flex items-center justify-center px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className={`mb-6 ${mounted ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: "0.1s" }}>
+            <span className="inline-block px-4 py-2 bg-brand-light text-brand font-body text-sm font-semibold tracking-wider uppercase">
+              Coming Soon
+            </span>
+          </div>
+
+          <div className={`mb-6 ${mounted ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: "0.2s" }}>
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-charcoal leading-tight mb-4">
+              Finding our
+              <br />
+              <span className="text-brand italic">true north</span>
+            </h1>
+          </div>
+
+          <div className={`mb-12 ${mounted ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: "0.3s" }}>
+            <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed max-w-2xl mx-auto">
+              We&apos;re crafting something thoughtful. This space will soon offer strategic insights, guidance, and the independent perspective you need to navigate complexity with clarity.
+            </p>
+          </div>
+
+          <div className={`mb-12 ${mounted ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: "0.4s" }}>
+            <div className="max-w-md mx-auto">
+              <div className="h-1 bg-stone-200 rounded-full overflow-hidden">
+                <div className="h-full bg-brand rounded-full transition-all duration-1000 ease-out" style={{ width: mounted ? '65%' : '0%' }} />
+              </div>
+              <p className="font-body text-sm text-stone-500 mt-3">Making progress</p>
+            </div>
+          </div>
+
+          <div className={`${mounted ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: "0.5s" }}>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
+              <p className="font-body text-stone-600">Have a question in the meantime?</p>
+              <button onClick={handleEmailClick} className="group inline-flex items-center gap-2 font-body font-semibold text-brand hover:gap-3 transition-all cursor-pointer">
+                <span>Get in touch</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-20 flex justify-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-brand animate-pulse-slow" />
+            <div className="w-2 h-2 rounded-full bg-brand animate-pulse-slow" style={{ animationDelay: "0.5s" }} />
+            <div className="w-2 h-2 rounded-full bg-brand animate-pulse-slow" style={{ animationDelay: "1s" }} />
+          </div>
+        </div>
+      </main>
+    </>
   );
 }

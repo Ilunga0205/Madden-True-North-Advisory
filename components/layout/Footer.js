@@ -19,22 +19,22 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-8 text-sm">
             <div className="flex flex-col gap-3">
               <Link href="/about" className="hover:text-foreground">
-                About
+                
               </Link>
               <Link href="/services" className="hover:text-foreground">
-                Services
+                
               </Link>
               <Link href="/offers" className="hover:text-foreground">
-                Offers
+                
               </Link>
             </div>
 
             <div className="flex flex-col gap-3">
               <Link href="/contact" className="hover:text-foreground">
-                Contact
+                
               </Link>
               <Link href="/insights" className="hover:text-foreground">
-                Insights
+                
               </Link>
             </div>
           </div>
