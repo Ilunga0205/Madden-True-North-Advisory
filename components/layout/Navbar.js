@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -16,75 +17,146 @@ export default function Navbar() {
   return (
     <>
       {showMessage && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-brand text-white px-6 py-3 rounded-lg shadow-lg animate-fadeInUp">
-          <p className="font-body text-sm font-medium">Coming soon – we&apos;re still crafting this section</p>
+        <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-[#8FA89A] text-white px-6 py-3 rounded-lg shadow-xl animate-fadeInUp">
+          <p className="font-['Montserrat'] text-sm font-medium">Coming soon – we&#39;re still crafting this section</p>
         </div>
       )}
 
-      <header className="sticky top-0 z-50 border-b bg-background">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
           
-          <Link href="/" className="font-semibold text-lg">
-            Madden True North Advisory
-          </Link> 
+          <Link href="/" className="relative h-10 w-48 hover:opacity-80 transition-opacity">
+            <Image
+              src="/images/logo.png"
+              alt="Madden True North Advisory"
+              fill
+              className="object-contain object-left"
+              priority
+            />
+          </Link>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm">
-            <a href="#" onClick={handleClick} className="text-muted-foreground hover:text-foreground cursor-pointer">About</a>
-            <a href="#" onClick={handleClick} className="text-muted-foreground hover:text-foreground cursor-pointer">Services</a>
-            <a href="#" onClick={handleClick} className="text-muted-foreground hover:text-foreground cursor-pointer">Offers</a>
-            <a href="#" onClick={handleClick} className="text-muted-foreground hover:text-foreground cursor-pointer">Insights</a>
+          <nav className="hidden lg:flex items-center gap-8">
+            <a 
+              href="#" 
+              onClick={handleClick} 
+              className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors cursor-pointer"
+            >
+              About
+            </a>
+            <a 
+              href="#" 
+              onClick={handleClick} 
+              className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors cursor-pointer"
+            >
+              Services
+            </a>
+            <a 
+              href="#" 
+              onClick={handleClick} 
+              className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors cursor-pointer"
+            >
+              Offers
+            </a>
+            <a 
+              href="#" 
+              onClick={handleClick} 
+              className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors cursor-pointer"
+            >
+              Insights
+            </a>
           </nav>
 
-          <a href="#" onClick={handleClick} className="hidden md:inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground cursor-pointer">
-            Book consultation
-          </a>
+          <Link 
+            href="/contact"
+            className="hidden lg:inline-flex items-center gap-2 bg-[#8FA89A] text-white font-['Montserrat'] font-semibold px-6 py-2.5 hover:bg-[#7a9284] transition-all text-sm group"
+          >
+            <span>Book consultation</span>
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
 
-          <button onClick={() => setOpen(!open)} className="md:hidden inline-flex items-center justify-center rounded-lg border px-3 py-2 text-sm" aria-label="Toggle navigation">
-            {open ? "Close" : "Menu"}
+          <button 
+            onClick={() => setOpen(!open)} 
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border-2 border-stone-300 text-[#1F1F1F] hover:border-[#8FA89A] transition-colors" 
+            aria-label="Toggle navigation"
+          >
+            {open ? (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
           </button>
         </div>
 
         {open && (
-          <div className="md:hidden border-t bg-background">
-            <nav className="px-6 py-6 flex flex-col gap-4 text-sm">
-              <a href="#" onClick={(e) => { handleClick(e); setOpen(false); }} className="cursor-pointer">About</a>
-              <a href="#" onClick={(e) => { handleClick(e); setOpen(false); }} className="cursor-pointer">Services</a>
-              <a href="#" onClick={(e) => { handleClick(e); setOpen(false); }} className="cursor-pointer">Offers</a>
-              <a href="#" onClick={(e) => { handleClick(e); setOpen(false); }} className="cursor-pointer">Insights</a>
-              <a href="#" onClick={(e) => { handleClick(e); setOpen(false); }} className="mt-4 inline-flex items-center justify-center rounded-xl bg-primary px-4 py-3 font-medium text-primary-foreground cursor-pointer">
-                Book consultation
+          <div className="lg:hidden border-t border-stone-200 bg-[#F6F4F1]">
+            <nav className="px-6 py-6 flex flex-col gap-4">
+              <a 
+                href="#" 
+                onClick={(e) => { handleClick(e); setOpen(false); }} 
+                className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors cursor-pointer py-2"
+              >
+                About
               </a>
+              <a 
+                href="#" 
+                onClick={(e) => { handleClick(e); setOpen(false); }} 
+                className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors cursor-pointer py-2"
+              >
+                Services
+              </a>
+              <a 
+                href="#" 
+                onClick={(e) => { handleClick(e); setOpen(false); }} 
+                className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors cursor-pointer py-2"
+              >
+                Offers
+              </a>
+              <a 
+                href="#" 
+                onClick={(e) => { handleClick(e); setOpen(false); }} 
+                className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors cursor-pointer py-2"
+              >
+                Insights
+              </a>
+              <Link 
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="mt-4 inline-flex items-center justify-center gap-2 bg-[#8FA89A] text-white font-['Montserrat'] font-semibold px-6 py-3 hover:bg-[#7a9284] transition-all group"
+              >
+                <span>Book consultation</span>
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
             </nav>
           </div>
         )}
       </header>
 
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          .bg-brand {
-            background-color: #8FA89A;
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -10px);
           }
-          
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translate(-50%, -10px);
-            }
-            to {
-              opacity: 1;
-              transform: translate(-50%, 0);
-            }
+          to {
+            opacity: 1;
+            transform: translate(-50%, 0);
           }
+        }
 
-          .animate-fadeInUp {
-            animation: fadeInUp 0.3s ease-out forwards;
-          }
-
-          .font-body {
-            font-family: 'Montserrat', sans-serif;
-          }
-        `
-      }} />
+        .animate-fadeInUp {
+          animation: fadeInUp 0.3s ease-out forwards;
+        }
+      `}</style>
     </>
   );
 }

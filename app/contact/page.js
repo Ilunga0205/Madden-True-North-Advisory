@@ -166,7 +166,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center">
             <div className="inline-block px-4 py-2 bg-brand text-white font-body text-xs sm:text-sm font-semibold rounded-full mb-6">
-              Let's Connect
+              Let&#39;s Connect
             </div>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-charcoal leading-tight mb-4">
               Book a <span className="text-brand italic">consultation</span>
@@ -354,7 +354,7 @@ export default function ContactPage() {
                       Prefer email?
                     </h3>
                     <p className="font-body text-sm text-stone-600 mb-3">
-                      We'll respond within 24 hours.
+                      We&#39;ll respond within 24 hours.
                     </p>
                     
                     <a
