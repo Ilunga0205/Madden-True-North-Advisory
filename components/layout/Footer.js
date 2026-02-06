@@ -31,7 +31,7 @@ export default function Footer() {
 
             <div className="flex flex-col gap-3">
               <Link href="/contact" className="hover:text-foreground">
-                Contact
+                
               </Link>
               <Link href="/insights" className="hover:text-foreground">
                 
