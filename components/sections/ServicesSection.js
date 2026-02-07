@@ -4,7 +4,7 @@ import { services } from "@/constants/brand";
 
 export default function ServicesSection() {
   return (
-    <section className="py-16 sm:py-24 lg:py-32 scroll-reveal bg-[#F6F4F1]">
+<section className="py-12 sm:py-16 lg:py-20 scroll-reveal bg-[#F6F4F1]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 sm:mb-16 gap-6">
           <div className="max-w-2xl">
