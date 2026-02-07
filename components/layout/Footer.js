@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,11 +8,20 @@ export default function Footer() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
           
+          
           {/* Brand Section */}
           <div className="lg:col-span-5">
-            <h3 style={{ fontFamily: "'Playfair Display', serif" }} className="text-2xl sm:text-3xl text-white mb-4 font-semibold tracking-tight">
-              Madden True North Advisory
-            </h3>
+            <div className="mb-6">
+              <Image 
+                src="/images/logowhite.png"
+                alt="Madden True North Advisory"
+                width={250}
+                height={60}
+                className="object-contain object-left"
+                style={{ height: 'auto' }}
+                priority
+              />
+            </div>
             <p style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm sm:text-base text-stone-400 leading-relaxed max-w-md mb-6">
               Supporting business owners with clarity, structure, and grounded decision-making.
             </p>
@@ -30,20 +40,20 @@ export default function Footer() {
 
           {/* Navigation Links */}
           <div className="lg:col-span-4">
-            <h4 style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+            <h4 style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm font-semibold text-white uppercase tracking-wider mb-6">
               Navigation
             </h4>
             <div className="flex flex-col gap-3">
               <Link href="/about" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
               </Link>
               <Link href="/services" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
-                
+                  {/* Services */}
               </Link>
               <Link href="/offers" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
-                
+                  {/* Offers */}
               </Link>
               <Link href="/insights" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
-                
+                  {/* Insights */}
               </Link>
               <Link href="/contact" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
                  {/* Contact */}
@@ -54,7 +64,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="lg:col-span-3">
-            <h4 style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+            <h4 style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm font-semibold text-white uppercase tracking-wider mb-6">
               Connect
             </h4>
             <div className="flex flex-col gap-3">

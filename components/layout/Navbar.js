@@ -27,7 +27,7 @@ export default function Navbar() {
           
           <Link href="/" className="relative h-10 w-48 hover:opacity-80 transition-opacity">
             <Image
-              src="/images/logo.png"
+              src="/images/logoblack.png"
               alt="Madden True North Advisory"
               fill
               className="object-contain object-left"
