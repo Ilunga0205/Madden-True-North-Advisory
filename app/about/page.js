@@ -83,6 +83,24 @@ export default function AboutPage() {
           }
         }
 
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(10px);
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+        }
+
         .animate-fadeInUp {
           opacity: 0;
           animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -96,6 +114,14 @@ export default function AboutPage() {
         .animate-slideDown {
           opacity: 0;
           animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-bounce {
+          animation: bounce 2s ease-in-out infinite;
+        }
+
+        .animate-pulse {
+          animation: pulse 2s ease-in-out infinite;
         }
 
         .scroll-reveal {
@@ -140,28 +166,65 @@ export default function AboutPage() {
         .text-taupe {
           color: #C6B8A5;
         }
+
+        /* Decorative scroll indicator */
+        .scroll-indicator {
+          position: relative;
+          width: 30px;
+          height: 50px;
+          border: 2px solid #8FA89A;
+          border-radius: 20px;
+        }
+
+        .scroll-indicator::before {
+          content: '';
+          position: absolute;
+          top: 8px;
+          left: 50%;
+          width: 4px;
+          height: 8px;
+          background: #8FA89A;
+          border-radius: 2px;
+          transform: translateX(-50%);
+          animation: scroll-down 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-down {
+          0% {
+            top: 8px;
+            opacity: 1;
+          }
+          50% {
+            top: 20px;
+            opacity: 0.5;
+          }
+          100% {
+            top: 8px;
+            opacity: 1;
+          }
+        }
       `}</style>
 
-      {/* Hero Section - Simple centered approach */}
-      <section className="relative bg-warm-white overflow-hidden py-24 md:py-32">
+      {/* Hero Section - Compact */}
+      <section className="relative bg-warm-white overflow-hidden py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           {/* Tag */}
-          <div className="animate-slideDown mb-6" style={{ animationDelay: "0.1s" }}>
+          <div className="animate-slideDown mb-4" style={{ animationDelay: "0.1s" }}>
             <span className="inline-block text-brand font-body text-sm font-semibold tracking-wider uppercase">
               About Madden True North Advisory
             </span>
           </div>
 
           {/* Main Headline */}
-          <div className="animate-fadeInUp mb-8" style={{ animationDelay: "0.2s" }}>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-charcoal leading-[1.1]">
+          <div className="animate-fadeInUp mb-6" style={{ animationDelay: "0.2s" }}>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.1]">
               Building clarity from <span className="text-brand italic">complexity</span>
             </h1>
           </div>
 
           {/* Description */}
-          <div className="animate-fadeInUp mb-10" style={{ animationDelay: "0.3s" }}>
-            <p className="font-body text-xl md:text-2xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
+          <div className="animate-fadeInUp mb-0" style={{ animationDelay: "0.3s" }}>
+            <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
               We partner with leaders to navigate uncertainty, strengthen governance, 
               and create lasting strategic advantage through independent perspective 
               and proven frameworks.
@@ -170,7 +233,33 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Image Section - Full width */}
+      {/* Scroll Teaser Section */}
+      <section className="relative bg-warm-white pt-4 pb-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          {/* Teaser Cards - Peek at content below */}
+          <div className="grid md:grid-cols-3 gap-6 mb-4">
+            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
+              <div className="text-brand font-display text-4xl mb-2">01</div>
+              <h3 className="font-display text-xl text-charcoal mb-2">Independence</h3>
+              <p className="font-body text-sm text-stone-600">Objective counsel, free from constraints</p>
+            </div>
+            
+            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.5s" }}>
+              <div className="text-brand font-display text-4xl mb-2">02</div>
+              <h3 className="font-display text-xl text-charcoal mb-2">Clarity</h3>
+              <p className="font-body text-sm text-stone-600">Clear frameworks that illuminate paths</p>
+            </div>
+            
+            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.6s" }}>
+              <div className="text-brand font-display text-4xl mb-2">03</div>
+              <h3 className="font-display text-xl text-charcoal mb-2">Partnership</h3>
+              <p className="font-body text-sm text-stone-600">Building capability alongside insight</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Image Section */}
       <section className="scroll-reveal">
         <div className="relative h-[400px] md:h-[500px]">
           <Image
@@ -180,7 +269,16 @@ export default function AboutPage() {
             className="object-cover"
             quality={100}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
+          
+          {/* Overlay text on image */}
+          <div className="absolute inset-0 flex items-end justify-center pb-12">
+            <div className="text-center">
+              <p className="font-display text-white text-2xl md:text-3xl italic">
+                "Strategy without execution is just wishful thinking"
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
