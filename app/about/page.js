@@ -262,7 +262,7 @@ export default function AboutPage() {
       <section className="scroll-reveal">
         <div className="relative h-[400px] md:h-[500px]">
           <Image
-            src="/images/about-hero.jpg"
+            src="/images/aboutpic.jpg"
             alt="Inge Madden - True North Advisory"
             fill
             className="object-cover"
