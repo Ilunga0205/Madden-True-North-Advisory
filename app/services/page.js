@@ -1,9 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function ServicesPage() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -128,196 +142,417 @@ export default function ServicesPage() {
         }
       `}</style>
 
-      {/* Hero Section */}
-      <section className="relative bg-warm-white overflow-hidden py-24 md:py-32">
+      {/* Hero Section - Compact */}
+      <section className="relative bg-warm-white overflow-hidden py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           {/* Tag */}
-          <div className="animate-slideDown mb-6" style={{ animationDelay: "0.1s" }}>
+          <div className="animate-slideDown mb-4" style={{ animationDelay: "0.1s" }}>
             <span className="inline-block text-brand font-body text-sm font-semibold tracking-wider uppercase">
-              Our Services
+              Services
             </span>
           </div>
 
           {/* Main Headline */}
-          <div className="animate-fadeInUp mb-8" style={{ animationDelay: "0.2s" }}>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-charcoal leading-[1.1]">
-              Strategic clarity for <span className="text-brand italic">complex challenges</span>
+          <div className="animate-fadeInUp mb-6" style={{ animationDelay: "0.2s" }}>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.1]">
+              Financial clarity meets <span className="text-brand italic">strategic support</span>
             </h1>
           </div>
 
           {/* Description */}
-          <div className="animate-fadeInUp mb-10" style={{ animationDelay: "0.3s" }}>
-            <p className="font-body text-xl md:text-2xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
-              Focused advisory services designed to support clarity, governance, 
-              and sustainable growth through independent perspective and proven frameworks.
+          <div className="animate-fadeInUp mb-0" style={{ animationDelay: "0.3s" }}>
+            <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
+              From bookkeeping to CFO-level advisory and leadership coaching—comprehensive support 
+              for business owners who want both financial clarity and sustainable growth.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Core Services Section */}
-      <section className="py-32 scroll-reveal bg-white">
+      {/* Services Snapshot Section */}
+      <section className="relative bg-warm-white pt-4 pb-6">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="max-w-3xl mb-16">
-            <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-6">
-              What we offer
+          <div className="grid md:grid-cols-3 gap-6 mb-4">
+            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
+              <div className="text-brand font-display text-4xl mb-2">💰</div>
+              <h3 className="font-display text-xl text-charcoal mb-2">Financial Clarity & Strategy</h3>
+              <p className="font-body text-sm text-stone-600">Accounting, bookkeeping, reporting, and forecasting</p>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight">
-              Services built for lasting impact
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            <ServiceCard
-              number="01"
-              title="Strategic Advisory"
-              description="High-level strategic guidance to support leadership decision-making and long-term positioning."
-              details={[
-                "Strategic planning and scenario analysis",
-                "Market positioning and competitive strategy",
-                "Growth strategy and opportunity assessment",
-                "Executive decision support and facilitation"
-              ]}
-            />
-            <ServiceCard
-              number="02"
-              title="Governance & Structure"
-              description="Support in designing governance frameworks that enable accountability and resilience."
-              details={[
-                "Board effectiveness and governance design",
-                "Risk management frameworks",
-                "Policy and compliance architecture",
-                "Stakeholder management structures"
-              ]}
-            />
-            <ServiceCard
-              number="03"
-              title="Organisational Alignment"
-              description="Helping teams align strategy, operations, and culture for effective execution."
-              details={[
-                "Strategic alignment workshops and facilitation",
-                "Operating model design and optimization",
-                "Change management support",
-                "Performance framework development"
-              ]}
-            />
+            
+            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.5s" }}>
+              <div className="text-brand font-display text-4xl mb-2">🎯</div>
+              <h3 className="font-display text-xl text-charcoal mb-2">Business & Decision Coaching</h3>
+              <p className="font-body text-sm text-stone-600">Strategic thinking, leadership support, clarity in direction</p>
+            </div>
+            
+            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.6s" }}>
+              <div className="text-brand font-display text-4xl mb-2">🌱</div>
+              <h3 className="font-display text-xl text-charcoal mb-2">Resilience & Well-being</h3>
+              <p className="font-body text-sm text-stone-600">Embodied and movement-based practices for sustainability</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How We Work Section */}
-      <section className="py-32 scroll-reveal bg-warm-white">
+      {/* Image Section */}
+      <section className="scroll-reveal">
+        <div className="relative h-[400px] md:h-[500px]">
+          <Image
+            src="/images/services-hero.jpg"
+            alt="Financial services and coaching"
+            fill
+            className="object-cover"
+            quality={100}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
+          
+          {/* Overlay text on image */}
+          <div className="absolute inset-0 flex items-end justify-center pb-12">
+            <div className="text-center">
+              <p className="font-display text-white text-2xl md:text-3xl italic">
+                "Clear numbers. Strategic thinking. Sustainable growth."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Service 1: Accounting & Financial Management - Left Aligned with Image */}
+      <section className="py-20 scroll-reveal bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid md:grid-cols-5 gap-16 items-start">
-            {/* Left - Heading */}
-            <div className="md:col-span-2">
-              <div className="inline-block px-4 py-2 bg-white text-brand font-body text-sm font-semibold rounded-full mb-6">
-                Our approach
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left - Content */}
+            <div className="order-2 md:order-1">
+              <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-xs font-semibold rounded-full mb-4">
+                Service 1
               </div>
-              <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight sticky top-24">
-                Tailored to your <span className="text-brand italic">context</span>
+              <h2 className="font-display text-4xl md:text-5xl text-charcoal mb-4">
+                Accounting & Financial Management
               </h2>
+              <p className="font-body text-xl text-stone-600 mb-6">
+                The foundation of financial clarity
+              </p>
+              
+              <div className="space-y-3 mb-8">
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Monthly bookkeeping</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Management accounts</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Cash flow tracking</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Budgeting and forecasting</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Clean-ups and system setup</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Support for international clients</span>
+                </div>
+              </div>
+
+              <div className="p-6 bg-warm-white border-l-4 border-brand mb-6">
+                <p className="font-body font-semibold text-charcoal mb-1">Outcome:</p>
+                <p className="font-body text-stone-700 italic">Clear numbers, less overwhelm, better decisions.</p>
+              </div>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center font-body text-brand hover:text-charcoal font-semibold transition-colors group"
+              >
+                <span className="underline underline-offset-4">Get started</span>
+                <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Right - Image */}
+            <div className="order-1 md:order-2">
+              <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/images/accounting-service.jpg"
+                  alt="Accounting and financial management"
+                  fill
+                  className="object-cover"
+                  quality={100}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Service 2: Financial Strategy & Advisory - Right Aligned */}
+      <section className="py-20 scroll-reveal bg-warm-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left - Image */}
+            <div>
+              <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/images/strategy-service.jpg"
+                  alt="Financial strategy and advisory"
+                  fill
+                  className="object-cover"
+                  quality={100}
+                />
+              </div>
             </div>
 
             {/* Right - Content */}
-            <div className="md:col-span-3 space-y-8">
-              <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                Every engagement is shaped by your specific challenges, opportunities, 
-                and constraints. We don't apply generic frameworks—we adapt our approach 
-                to what you actually need.
+            <div>
+              <div className="inline-block px-4 py-2 bg-brand text-white font-body text-xs font-semibold rounded-full mb-4">
+                Service 2
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl text-charcoal mb-4">
+                Financial Strategy & Advisory
+              </h2>
+              <p className="font-body text-xl text-stone-600 mb-6">
+                CFO-level thinking for your business
               </p>
-              <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                Whether you need strategic clarity for a critical decision, governance 
-                structures that enable better oversight, or organizational alignment to 
-                execute on your vision, we bring the right combination of analytical rigor 
-                and practical wisdom.
-              </p>
-              <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                Our engagements are collaborative, with clear deliverables and outcomes 
-                that you can implement immediately.
-              </p>
+              
+              <div className="space-y-3 mb-8">
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Business performance reviews</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Growth planning</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Pricing and profitability analysis</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">CFO-style advisory for small businesses</span>
+                </div>
+              </div>
+
+              <div className="p-6 bg-white border-l-4 border-brand mb-6">
+                <p className="font-body font-semibold text-charcoal mb-1">Outcome:</p>
+                <p className="font-body text-stone-700 italic">Strategic clarity and financial confidence.</p>
+              </div>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center font-body text-brand hover:text-charcoal font-semibold transition-colors group"
+              >
+                <span className="underline underline-offset-4">Get started</span>
+                <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-32 scroll-reveal bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="mb-20 text-center max-w-3xl mx-auto">
-            <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-6">
-              How we work
+      {/* Service 3: Coaching & Decision Support - Centered Card */}
+      <section className="py-20 scroll-reveal bg-white">
+        <div className="max-w-5xl mx-auto px-6 md:px-12">
+          <div className="bg-warm-white p-8 md:p-12 border-l-4 border-brand">
+            <div className="inline-block px-4 py-2 bg-brand text-white font-body text-xs font-semibold rounded-full mb-4">
+              Service 3
             </div>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight mb-6">
-              From insight to <span className="text-brand italic">implementation</span>
+            <h2 className="font-display text-4xl md:text-5xl text-charcoal mb-4">
+              Coaching & Decision Support
             </h2>
-          </div>
+            <p className="font-body text-xl text-stone-600 mb-8">
+              Leadership clarity when you need it most
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">One-on-one coaching sessions</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Business clarity and prioritisation</span>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Leadership and confidence support</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-body text-stone-700">Navigating transitions and growth phases</span>
+                </div>
+              </div>
+            </div>
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <div className="scroll-reveal" style={{ transitionDelay: "0.1s" }}>
-              <ProcessItem
-                title="Discovery & Scoping"
-                description="We begin by understanding your context, challenges, and what success looks like for you."
-              />
+            <div className="p-6 bg-white border-l-4 border-brand mb-6">
+              <p className="font-body font-semibold text-charcoal mb-1">Outcome:</p>
+              <p className="font-body text-stone-700 italic">Focused decisions and aligned leadership.</p>
             </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.2s" }}>
-              <ProcessItem
-                title="Analysis & Framework"
-                description="We apply analytical rigor and proven frameworks to structure thinking and identify pathways forward."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.3s" }}>
-              <ProcessItem
-                title="Recommendations"
-                description="We deliver clear, actionable recommendations grounded in your reality and constraints."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.4s" }}>
-              <ProcessItem
-                title="Implementation Support"
-                description="We support execution through coaching, facilitation, or ongoing advisory as needed."
-              />
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center font-body text-brand hover:text-charcoal font-semibold transition-colors group"
+            >
+              <span className="underline underline-offset-4">Get started</span>
+              <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Service 4: Resilience & Embodied Support - Dark Card */}
+      <section className="py-20 scroll-reveal bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="bg-charcoal rounded-lg overflow-hidden">
+            <div className="grid md:grid-cols-5">
+              {/* Left - Content (3 columns) */}
+              <div className="md:col-span-3 p-8 md:p-12">
+                <div className="inline-block px-4 py-2 bg-brand text-white font-body text-xs font-semibold rounded-full mb-4">
+                  Service 4 • Optional Add-On
+                </div>
+                <h2 className="font-display text-4xl md:text-5xl text-white mb-4">
+                  Resilience & Embodied Support
+                </h2>
+                <p className="font-body text-xl text-white/80 mb-8">
+                  Sustainable energy for sustainable business
+                </p>
+                
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-start gap-3">
+                    <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-body text-white/90">Nia-based movement sessions</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-body text-white/90">Grounding and stress management</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <svg className="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-body text-white/90">Energy and focus support for business owners</span>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white/10 backdrop-blur-sm border-l-4 border-brand mb-6">
+                  <p className="font-body font-semibold text-white mb-1">Outcome:</p>
+                  <p className="font-body text-white/80 italic">Sustainable energy and resilience while building a business.</p>
+                </div>
+
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center font-body text-white hover:text-brand font-semibold transition-colors group"
+                >
+                  <span className="underline underline-offset-4">Learn more</span>
+                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+
+              {/* Right - Image (2 columns) */}
+              <div className="md:col-span-2 relative min-h-[300px] md:min-h-0">
+                <Image
+                  src="/images/resilience-service.jpg"
+                  alt="Resilience and embodied support"
+                  fill
+                  className="object-cover"
+                  quality={100}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Engagement Types */}
+      {/* How It Works Together Section */}
       <section className="py-32 scroll-reveal bg-warm-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="mb-20">
+          <div className="mb-16 text-center max-w-3xl mx-auto">
             <div className="inline-block px-4 py-2 bg-brand text-white font-body text-sm font-semibold rounded-full mb-6">
-              Engagement models
+              The complete picture
             </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight max-w-4xl">
-              Flexible partnerships for different needs
+            <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight">
+              Services that work <span className="text-brand italic">together</span>
             </h2>
+            <p className="font-body text-xl text-stone-700 leading-relaxed mt-6">
+              You don't have to choose just one. Most clients combine services to create the 
+              support structure that fits their business and stage of growth.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="scroll-reveal" style={{ transitionDelay: "0.1s" }}>
-              <EngagementCard
-                title="Project-Based"
-                description="Defined scope and timeline for specific strategic challenges or governance needs. Clear deliverables with beginning and end points."
-              />
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 border-l-4 border-brand">
+              <h3 className="font-display text-2xl text-charcoal mb-3">For Solo Founders</h3>
+              <p className="font-body text-stone-700 leading-relaxed mb-4">
+                Start with solid bookkeeping and monthly reporting. Add coaching when you need 
+                help prioritizing or making key decisions.
+              </p>
+              <div className="text-sm font-body text-brand">Foundation → Growth</div>
             </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.2s" }}>
-              <EngagementCard
-                title="Retainer Advisory"
-                description="Ongoing strategic counsel for leadership teams navigating continuous change and complex decisions over time."
-              />
+
+            <div className="bg-white p-8 border-l-4 border-brand">
+              <h3 className="font-display text-2xl text-charcoal mb-3">For Scaling Businesses</h3>
+              <p className="font-body text-stone-700 leading-relaxed mb-4">
+                Combine financial management with strategic advisory and regular coaching 
+                to navigate growth with confidence.
+              </p>
+              <div className="text-sm font-body text-brand">Growth → Advisory</div>
             </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.3s" }}>
-              <EngagementCard
-                title="Board Support"
-                description="Independent perspective for boards of directors on governance, oversight, and strategic direction."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.4s" }}>
-              <EngagementCard
-                title="Facilitation & Workshops"
-                description="Structured sessions to align leadership teams, develop strategy, or work through critical decisions."
-              />
+
+            <div className="bg-white p-8 border-l-4 border-brand">
+              <h3 className="font-display text-2xl text-charcoal mb-3">For Sustainable Leaders</h3>
+              <p className="font-body text-stone-700 leading-relaxed mb-4">
+                Add resilience support to any package to build practices that keep you 
+                grounded and energized through challenges.
+              </p>
+              <div className="text-sm font-body text-brand">Any package + Resilience</div>
             </div>
           </div>
         </div>
@@ -332,24 +567,25 @@ export default function ServicesPage() {
 
         <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-center">
           <div className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm text-white/90 font-body text-sm font-medium rounded-full mb-8">
-            Let's connect
+            Let's talk
           </div>
           
           <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight">
-            Ready to explore
+            Which services
             <br />
-            <span className="italic">how we can help?</span>
+            <span className="italic">fit your needs?</span>
           </h2>
           
           <p className="font-body text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto">
-            Every engagement begins with a conversation about what you're facing and whether we're the right fit.
+            Not sure where to start? Let's have a conversation about where you are and what 
+            support would be most valuable right now.
           </p>
           
           <Link
             href="/contact"
             className="group inline-flex items-center justify-center px-10 py-5 bg-white text-brand font-body font-semibold hover:bg-white/90 transition-all hover:shadow-2xl hover:shadow-white/20"
           >
-            <span>Start a conversation</span>
+            <span>Get in touch</span>
             <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -357,67 +593,5 @@ export default function ServicesPage() {
         </div>
       </section>
     </main>
-  );
-}
-
-/* ---------- Components ---------- */
-
-function ServiceCard({ number, title, description, details }) {
-  return (
-    <div className="scroll-reveal bg-white p-8 md:p-10 border-l-4 border-brand group hover:bg-white hover:shadow-lg transition-all">
-      <div className="flex items-start gap-8">
-        <div className="font-display text-6xl md:text-7xl text-stone-200 group-hover:text-brand/30 transition-colors flex-shrink-0">
-          {number}
-        </div>
-        <div className="flex-1 pt-2">
-          <h3 className="font-display text-2xl md:text-3xl mb-3 text-charcoal group-hover:text-brand transition-colors">
-            {title}
-          </h3>
-          <p className="font-body text-lg text-stone-700 leading-relaxed mb-6">
-            {description}
-          </p>
-          
-          {/* Details List */}
-          <div className="space-y-2">
-            {details.map((detail, idx) => (
-              <div key={idx} className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="font-body text-stone-600">
-                  {detail}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ProcessItem({ title, description }) {
-  return (
-    <div className="group bg-warm-white p-8 h-full border-l-4 border-transparent hover:border-brand transition-all">
-      <h3 className="font-display text-2xl md:text-3xl mb-4 text-charcoal group-hover:text-brand transition-colors">
-        {title}
-      </h3>
-      <p className="font-body text-lg text-stone-700 leading-relaxed">
-        {description}
-      </p>
-    </div>
-  );
-}
-
-function EngagementCard({ title, description }) {
-  return (
-    <div className="group bg-white p-8 border border-stone-200 hover:border-brand hover:shadow-lg transition-all h-full">
-      <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-4 group-hover:text-brand transition-colors">
-        {title}
-      </h3>
-      <p className="font-body text-lg text-stone-700 leading-relaxed">
-        {description}
-      </p>
-    </div>
   );
 }
