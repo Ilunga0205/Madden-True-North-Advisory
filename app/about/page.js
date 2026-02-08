@@ -211,23 +211,22 @@ export default function AboutPage() {
           {/* Tag */}
           <div className="animate-slideDown mb-4" style={{ animationDelay: "0.1s" }}>
             <span className="inline-block text-brand font-body text-sm font-semibold tracking-wider uppercase">
-              About Madden True North Advisory
+              About Inge Madden
             </span>
           </div>
 
           {/* Main Headline */}
           <div className="animate-fadeInUp mb-6" style={{ animationDelay: "0.2s" }}>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.1]">
-              Building clarity from <span className="text-brand italic">complexity</span>
+              Financial clarity meets <span className="text-brand italic">human insight</span>
             </h1>
           </div>
 
           {/* Description */}
           <div className="animate-fadeInUp mb-0" style={{ animationDelay: "0.3s" }}>
             <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
-              We partner with leaders to navigate uncertainty, strengthen governance, 
-              and create lasting strategic advantage through independent perspective 
-              and proven frameworks.
+              I'm Inge Madden, founder of True North Advisory. I help business owners gain clarity, 
+              plan for sustainable growth, and lead with confidence.
             </p>
           </div>
         </div>
@@ -240,20 +239,20 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-6 mb-4">
             <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
               <div className="text-brand font-display text-4xl mb-2">01</div>
-              <h3 className="font-display text-xl text-charcoal mb-2">Independence</h3>
-              <p className="font-body text-sm text-stone-600">Objective counsel, free from constraints</p>
+              <h3 className="font-display text-xl text-charcoal mb-2">Financial Expertise</h3>
+              <p className="font-body text-sm text-stone-600">Accounting & strategic finance background</p>
             </div>
             
             <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.5s" }}>
               <div className="text-brand font-display text-4xl mb-2">02</div>
-              <h3 className="font-display text-xl text-charcoal mb-2">Clarity</h3>
-              <p className="font-body text-sm text-stone-600">Clear frameworks that illuminate paths</p>
+              <h3 className="font-display text-xl text-charcoal mb-2">Coaching</h3>
+              <p className="font-body text-sm text-stone-600">Supporting your leadership journey</p>
             </div>
             
             <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.6s" }}>
               <div className="text-brand font-display text-4xl mb-2">03</div>
-              <h3 className="font-display text-xl text-charcoal mb-2">Partnership</h3>
-              <p className="font-body text-sm text-stone-600">Building capability alongside insight</p>
+              <h3 className="font-display text-xl text-charcoal mb-2">Resilience</h3>
+              <p className="font-body text-sm text-stone-600">Practical strategies for sustainable growth</p>
             </div>
           </div>
         </div>
@@ -264,7 +263,7 @@ export default function AboutPage() {
         <div className="relative h-[400px] md:h-[500px]">
           <Image
             src="/images/about-hero.jpg"
-            alt="Strategic consultation"
+            alt="Inge Madden - True North Advisory"
             fill
             className="object-cover"
             quality={100}
@@ -275,7 +274,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 flex items-end justify-center pb-12">
             <div className="text-center">
               <p className="font-display text-white text-2xl md:text-3xl italic">
-                "Strategy without execution is just wishful thinking"
+                "True growth is about understanding priorities and making deliberate choices"
               </p>
             </div>
           </div>
@@ -289,33 +288,33 @@ export default function AboutPage() {
             {/* Left - Heading */}
             <div className="md:col-span-2">
               <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-6">
-                Our foundation
+                My journey
               </div>
               <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight sticky top-24">
-                Strategic clarity enables <span className="text-brand italic">better decisions</span>
+                From numbers to <span className="text-brand italic">holistic growth</span>
               </h2>
             </div>
 
             {/* Right - Content */}
             <div className="md:col-span-3 space-y-8">
               <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                True North Advisory is built on the belief that with the right perspective 
-                and frameworks, complex challenges become navigable.
+                I began my career in accounting and finance, working with international clients 
+                and seeing firsthand how clarity in numbers drives confident decision-making.
               </p>
               <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                We work closely with senior leaders to define direction, strengthen 
-                governance structures, and ensure strategic vision translates into 
-                meaningful outcomes.
+                Over time, I realized that true growth isn't just about financials — it's about 
+                understanding priorities, making deliberate choices, and staying grounded through change.
               </p>
               <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                Our approach balances analytical rigor with practical wisdom, ensuring 
-                recommendations can be implemented in your reality, not just on paper.
+                That's why I combine financial expertise with coaching and practical resilience 
+                strategies, helping business owners gain clarity, plan for sustainable growth, 
+                and lead with confidence.
               </p>
               
               <div className="mt-12 p-8 bg-warm-white border-l-4 border-brand">
                 <p className="font-body text-lg text-stone-700 leading-relaxed italic">
-                  "Complex problems require clear frameworks that illuminate paths forward 
-                  without oversimplification. That's where we begin."
+                  "My work supports both the strategic and human sides of business, offering 
+                  a clear, structured, and balanced path forward."
                 </p>
               </div>
             </div>
@@ -328,28 +327,28 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="max-w-3xl mb-16">
             <div className="inline-block px-4 py-2 bg-brand text-white font-body text-sm font-semibold rounded-full mb-6">
-              How we work
+              My approach
             </div>
             <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight">
-              Principles that guide every engagement
+              Three pillars of sustainable growth
             </h2>
           </div>
 
           <div className="space-y-6">
             <PrincipleCard
               number="01"
-              title="Independence"
-              description="We provide objective counsel, free from internal politics and organizational constraints."
+              title="Financial Expertise"
+              description="Deep experience in accounting and finance, working with international clients to turn numbers into actionable insights and confident decisions."
             />
             <PrincipleCard
               number="02"
-              title="Clarity"
-              description="Complex problems require clear frameworks that illuminate paths forward without oversimplification."
+              title="Coaching & Strategy"
+              description="Helping you understand your priorities, make deliberate choices, and stay aligned with your vision as you grow."
             />
             <PrincipleCard
               number="03"
-              title="Partnership"
-              description="We work alongside leadership teams, building capability and confidence alongside insight."
+              title="Practical Resilience"
+              description="Building sustainable systems and mindsets that help you stay grounded through change and navigate challenges with confidence."
             />
           </div>
         </div>
@@ -360,36 +359,36 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="mb-20 text-center max-w-3xl mx-auto">
             <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-6">
-              Our approach
+              Working together
             </div>
             <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight mb-6">
-              From insight to <span className="text-brand italic">implementation</span>
+              What you can <span className="text-brand italic">expect</span>
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <div className="scroll-reveal" style={{ transitionDelay: "0.1s" }}>
               <ApproachItem
-                title="Listen deeply"
-                description="Every engagement begins with understanding your context, constraints, and what's truly at stake."
+                title="Clear financial foundation"
+                description="Your books are accurate, your reports are meaningful, and you understand exactly where your business stands."
               />
             </div>
             <div className="scroll-reveal" style={{ transitionDelay: "0.2s" }}>
               <ApproachItem
-                title="Structure thinking"
-                description="We bring frameworks and analytical rigor to organize complexity without losing nuance."
+                title="Strategic clarity"
+                description="You have a clear plan for growth, informed by both numbers and your deeper business priorities."
               />
             </div>
             <div className="scroll-reveal" style={{ transitionDelay: "0.3s" }}>
               <ApproachItem
-                title="Challenge constructively"
-                description="Our value lies in asking difficult questions and offering perspectives you might not hear internally."
+                title="Confident decision-making"
+                description="You feel equipped to make important decisions, knowing you have both the data and the support you need."
               />
             </div>
             <div className="scroll-reveal" style={{ transitionDelay: "0.4s" }}>
               <ApproachItem
-                title="Enable action"
-                description="Insight without implementation is academic. We ensure recommendations can be executed."
+                title="Sustainable systems"
+                description="You've built resilient practices and mindsets that support long-term success, not just short-term wins."
               />
             </div>
           </div>
@@ -401,36 +400,36 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="mb-20">
             <div className="inline-block px-4 py-2 bg-brand text-white font-body text-sm font-semibold rounded-full mb-6">
-              Our values
+              Core values
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight max-w-4xl">
-              What guides our work
+              What guides my work
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="scroll-reveal" style={{ transitionDelay: "0.1s" }}>
               <ValueCard
-                title="Intellectual honesty"
-                description="We tell you what we believe to be true, not what you want to hear. Trust is built on candor."
+                title="Clarity over complexity"
+                description="Numbers should inform, not overwhelm. I help you see what matters and make sense of your financial story."
               />
             </div>
             <div className="scroll-reveal" style={{ transitionDelay: "0.2s" }}>
               <ValueCard
-                title="Long-term thinking"
-                description="We optimize for sustainable outcomes over short-term wins. Quick fixes rarely solve complex problems."
+                title="Growth with balance"
+                description="Sustainable success comes from honoring both the strategic and human sides of business. It's not one or the other."
               />
             </div>
             <div className="scroll-reveal" style={{ transitionDelay: "0.3s" }}>
               <ValueCard
-                title="Practical wisdom"
-                description="Theory matters, but only when it translates to real-world application. We work in your reality."
+                title="Deliberate decision-making"
+                description="Every choice shapes your business. I support you in making decisions that align with your priorities and values."
               />
             </div>
             <div className="scroll-reveal" style={{ transitionDelay: "0.4s" }}>
               <ValueCard
-                title="Respectful challenge"
-                description="We push thinking forward while honoring the complexity you navigate daily. Growth requires discomfort."
+                title="Grounded resilience"
+                description="Change is constant. I help you build the systems and mindsets that keep you steady through growth and challenges."
               />
             </div>
           </div>
@@ -450,13 +449,13 @@ export default function AboutPage() {
           </div>
           
           <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight">
-            Ready to find your
+            Ready to find
             <br />
-            <span className="italic">true north?</span>
+            <span className="italic">your clarity?</span>
           </h2>
           
           <p className="font-body text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto">
-            Every engagement begins with a conversation about what you're facing and how we might help.
+            Let's talk about where you are, where you want to go, and how I can support your journey.
           </p>
           
           <Link
