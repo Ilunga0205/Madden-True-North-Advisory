@@ -1,28 +1,62 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const insights = [
   {
     slug: "navigating-complexity",
     title: "Navigating Complexity in Leadership",
-    excerpt:
-      "Why clarity matters most when decisions are hardest to make.",
+    excerpt: "Why clarity matters most when decisions are hardest to make.",
     date: "January 2026",
-    category: "Leadership"
+    category: "Leadership",
+    type: "article",
+    readTime: "8 min read",
+    image: "/images/insights/complexity.jpg"
+  },
+  {
+    slug: "quarterly-planning-framework",
+    title: "A Practical Framework for Quarterly Planning",
+    excerpt: "How to align your team around what matters most, without drowning in process.",
+    date: "January 2026",
+    category: "Strategy",
+    type: "video",
+    duration: "12 min",
+    image: "/images/insights/planning.jpg",
+    videoUrl: "https://youtube.com/..."
   },
   {
     slug: "strategy-vs-execution",
     title: "Strategy vs Execution",
-    excerpt:
-      "Bridging the gap between vision and operational reality.",
+    excerpt: "Bridging the gap between vision and operational reality.",
     date: "December 2025",
-    category: "Strategy"
+    category: "Strategy",
+    type: "article",
+    readTime: "6 min read",
+    image: "/images/insights/strategy.jpg"
+  },
+  {
+    slug: "board-effectiveness",
+    title: "What Makes a Board Truly Effective?",
+    excerpt: "Insights from years of governance work with growing organizations.",
+    date: "December 2025",
+    category: "Governance",
+    type: "video",
+    duration: "15 min",
+    image: "/images/insights/board.jpg",
+    videoUrl: "https://youtube.com/..."
   },
 ];
 
+const categories = ["All", "Leadership", "Strategy", "Governance", "Finance"];
+const contentTypes = ["All", "Articles", "Videos"];
+
 export default function InsightsPage() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedType, setSelectedType] = useState("All");
+  const [filteredInsights, setFilteredInsights] = useState(insights);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,6 +75,21 @@ export default function InsightsPage() {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    let filtered = insights;
+
+    if (selectedCategory !== "All") {
+      filtered = filtered.filter((item) => item.category === selectedCategory);
+    }
+
+    if (selectedType !== "All") {
+      const typeMap = { Articles: "article", Videos: "video" };
+      filtered = filtered.filter((item) => item.type === typeMap[selectedType]);
+    }
+
+    setFilteredInsights(filtered);
+  }, [selectedCategory, selectedType]);
 
   return (
     <main className="bg-white">
@@ -116,81 +165,165 @@ export default function InsightsPage() {
           background-color: #F6F4F1;
         }
 
+        .bg-charcoal {
+          background-color: #1F1F1F;
+        }
+
         .text-charcoal {
           color: #1F1F1F;
+        }
+
+        .filter-btn {
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .filter-btn.active {
+          background-color: #8FA89A;
+          color: white;
         }
       `}</style>
 
       {/* Hero Section */}
-      <section className="relative bg-warm-white overflow-hidden py-24 md:py-32">
+      <section className="relative bg-warm-white overflow-hidden py-20 md:py-24">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <div className="animate-slideDown mb-6" style={{ animationDelay: "0.1s" }}>
+          <div className="animate-slideDown mb-4" style={{ animationDelay: "0.1s" }}>
             <span className="inline-block text-brand font-body text-sm font-semibold tracking-wider uppercase">
               Insights & Perspectives
             </span>
           </div>
 
-          <div className="animate-fadeInUp mb-8" style={{ animationDelay: "0.2s" }}>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-charcoal leading-[1.1]">
-              Thoughts on leadership, <span className="text-brand italic">strategy</span>, and governance
+          <div className="animate-fadeInUp mb-6" style={{ animationDelay: "0.2s" }}>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.1]">
+              Thoughts on leadership, <span className="text-brand italic">strategy</span>, and growth
             </h1>
           </div>
 
-          <div className="animate-fadeInUp mb-10" style={{ animationDelay: "0.3s" }}>
-            <p className="font-body text-xl md:text-2xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
-              Reflections, commentary, and perspectives on navigating complexity, 
-              strengthening governance, and leading with clarity.
+          <div className="animate-fadeInUp" style={{ animationDelay: "0.3s" }}>
+            <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
+              Articles, videos, and reflections on navigating complexity, strengthening governance, 
+              and leading with clarity.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Insights Grid */}
-      <section className="py-32 scroll-reveal bg-white">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <div className="max-w-3xl mb-16">
-            <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-6">
-              Recent articles
+      {/* Featured Content */}
+      <section className="py-16 scroll-reveal bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="mb-12">
+            <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-4">
+              Featured
             </div>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight">
+            <h2 className="font-display text-3xl md:text-4xl text-charcoal">
               Latest thinking
             </h2>
           </div>
 
-          <div className="space-y-8">
-            {insights.map((post, index) => (
-              <InsightCard
-                key={post.slug}
-                post={post}
-                index={index}
-              />
-            ))}
+          <FeaturedInsight insight={insights[0]} />
+        </div>
+      </section>
+
+      {/* Filter Section */}
+      <section className="py-12 scroll-reveal bg-warm-white border-y border-stone-200">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            {/* Category Filters */}
+            <div>
+              <p className="font-body text-sm text-stone-600 mb-3 font-medium">Filter by topic:</p>
+              <div className="flex flex-wrap gap-2">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`filter-btn px-4 py-2 font-body text-sm font-medium rounded-full border ${
+                      selectedCategory === cat
+                        ? "active border-brand"
+                        : "bg-white border-stone-300 text-stone-700 hover:border-brand"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Content Type Filters */}
+            <div>
+              <p className="font-body text-sm text-stone-600 mb-3 font-medium">Content type:</p>
+              <div className="flex flex-wrap gap-2">
+                {contentTypes.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setSelectedType(type)}
+                    className={`filter-btn px-4 py-2 font-body text-sm font-medium rounded-full border ${
+                      selectedType === type
+                        ? "active border-brand"
+                        : "bg-white border-stone-300 text-stone-700 hover:border-brand"
+                    }`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* About Insights Section */}
+      {/* Insights Grid */}
+      <section className="py-20 scroll-reveal bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          {filteredInsights.length > 0 ? (
+            <div className="grid md:grid-cols-2 gap-8">
+              {filteredInsights.slice(1).map((insight, index) => (
+                <InsightCard key={insight.slug} insight={insight} index={index} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <p className="font-body text-lg text-stone-600">
+                No content found for this filter combination.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
       <section className="py-32 scroll-reveal bg-warm-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-5 gap-16 items-start">
             <div className="md:col-span-2">
               <div className="inline-block px-4 py-2 bg-white text-brand font-body text-sm font-semibold rounded-full mb-6">
-                Why we write
+                Stay informed
               </div>
-              <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight sticky top-24">
-                Sharing what we <span className="text-brand italic">learn</span>
+              <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight">
+                Get new insights <span className="text-brand italic">delivered</span>
               </h2>
             </div>
 
-            <div className="md:col-span-3 space-y-8">
+            <div className="md:col-span-3 space-y-6">
               <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                These insights emerge from years of working with leaders navigating 
-                complex challenges. Each piece reflects patterns we&#39;ve observed, 
-                frameworks we&#39;ve found useful, and questions worth asking.
+                Receive new articles and videos directly to your inbox. Thoughtful perspectives 
+                on leadership, strategy, and governance—without the noise.
               </p>
-              <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                We write for leaders who value clear thinking over buzzwords, practical 
-                wisdom over theoretical perfection, and honest reflection over easy answers.
+              
+              <form className="flex flex-col sm:flex-row gap-3 max-w-xl">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="flex-1 px-5 py-4 font-body bg-white border border-stone-300 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all"
+                />
+                <button
+                  type="submit"
+                  className="px-8 py-4 bg-brand text-white font-body font-semibold hover:bg-brand/90 transition-all whitespace-nowrap"
+                >
+                  Subscribe
+                </button>
+              </form>
+              
+              <p className="font-body text-sm text-stone-600">
+                Unsubscribe anytime. We respect your inbox.
               </p>
             </div>
           </div>
@@ -205,7 +338,7 @@ export default function InsightsPage() {
               Topics we explore
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight max-w-4xl">
-              The themes that matter most
+              The themes that <span className="text-brand italic">matter most</span>
             </h2>
           </div>
 
@@ -223,8 +356,8 @@ export default function InsightsPage() {
               description="How strategy translates to execution. Aligning vision with capability. Navigating change without losing momentum."
             />
             <TopicCard
-              title="Decision-Making"
-              description="When to decide and when to wait. Managing uncertainty. Creating space for difficult conversations that matter."
+              title="Financial Intelligence"
+              description="Understanding the numbers that matter. Building systems that inform decisions. Creating clarity from data."
             />
           </div>
         </div>
@@ -233,7 +366,7 @@ export default function InsightsPage() {
       {/* CTA Section */}
       <section className="relative py-40 scroll-reveal overflow-hidden bg-brand">
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-125 h-[500px] bg-white/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl" />
         </div>
 
@@ -249,7 +382,7 @@ export default function InsightsPage() {
           </h2>
           
           <p className="font-body text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto">
-            If these perspectives resonate with what you&#39;re navigating, let&#39;s explore how we can help.
+            If these perspectives resonate with what you're navigating, let's explore how we can help.
           </p>
           
           <Link
@@ -267,43 +400,142 @@ export default function InsightsPage() {
   );
 }
 
-function InsightCard({ post, index }) {
+/* ---------- Components ---------- */
+
+function FeaturedInsight({ insight }) {
   return (
-    <article className="scroll-reveal group" style={{ transitionDelay: `${index * 0.1}s` }}>
-      <Link href={`/insights/${post.slug}`}>
-        <div className="bg-white p-8 md:p-10 border-l-4 border-transparent hover:border-brand hover:shadow-lg transition-all">
-          <div className="flex items-start justify-between gap-6 mb-4">
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="inline-block px-3 py-1 bg-warm-white text-brand font-body text-xs font-semibold rounded-full">
-                  {post.category}
-                </span>
-                <span className="font-body text-sm text-stone-500">
-                  {post.date}
-                </span>
+    <Link href={`/insights/${insight.slug}`}>
+      <div className="group relative bg-white border border-stone-200 hover:border-brand overflow-hidden hover:shadow-xl transition-all">
+        <div className="grid md:grid-cols-2 gap-0">
+          {/* Image */}
+          <div className="relative h-[300px] md:h-full overflow-hidden">
+            <Image
+              src={insight.image}
+              alt={insight.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            {insight.type === "video" && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+                <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
               </div>
-              <h3 className="font-display text-2xl md:text-3xl text-charcoal group-hover:text-brand transition-colors mb-3">
-                {post.title}
-              </h3>
-              <p className="font-body text-lg text-stone-700 leading-relaxed">
-                {post.excerpt}
-              </p>
-            </div>
-            <div className="shrink-0">
-              <div className="w-10 h-10 rounded-full bg-warm-white group-hover:bg-brand transition-colors flex items-center justify-center">
-                <svg className="w-5 h-5 text-brand group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </div>
+            )}
           </div>
-          <div className="pt-6 border-t border-stone-200">
-            <span className="inline-flex items-center font-body text-brand hover:text-charcoal font-medium transition-colors">
-              Read article
-              <svg className="w-4 h-4 ml-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+          {/* Content */}
+          <div className="p-8 md:p-12 flex flex-col justify-center">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="inline-block px-3 py-1 bg-brand text-white font-body text-xs font-semibold rounded-full">
+                {insight.category}
+              </span>
+              <span className="font-body text-sm text-stone-500">
+                {insight.date}
+              </span>
+              {insight.type === "video" && (
+                <span className="inline-flex items-center gap-1 font-body text-sm text-stone-500">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {insight.duration}
+                </span>
+              )}
+              {insight.type === "article" && (
+                <span className="font-body text-sm text-stone-500">
+                  {insight.readTime}
+                </span>
+              )}
+            </div>
+
+            <h3 className="font-display text-3xl md:text-4xl text-charcoal group-hover:text-brand transition-colors mb-4 leading-tight">
+              {insight.title}
+            </h3>
+            
+            <p className="font-body text-lg text-stone-700 leading-relaxed mb-6">
+              {insight.excerpt}
+            </p>
+
+            <div className="inline-flex items-center font-body text-brand group-hover:text-charcoal font-semibold transition-colors">
+              {insight.type === "video" ? "Watch video" : "Read article"}
+              <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function InsightCard({ insight, index }) {
+  return (
+    <article className="scroll-reveal group" style={{ transitionDelay: `${index * 0.1}s` }}>
+      <Link href={`/insights/${insight.slug}`}>
+        <div className="bg-white border border-stone-200 hover:border-brand hover:shadow-lg transition-all overflow-hidden h-full flex flex-col">
+          {/* Image */}
+          <div className="relative h-[240px] overflow-hidden">
+            <Image
+              src={insight.image}
+              alt={insight.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            {insight.type === "video" && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+                <div className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5 text-brand ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="p-6 flex-1 flex flex-col">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="inline-block px-3 py-1 bg-warm-white text-brand font-body text-xs font-semibold rounded-full">
+                {insight.category}
+              </span>
+              <span className="font-body text-sm text-stone-500">
+                {insight.date}
+              </span>
+            </div>
+
+            <h3 className="font-display text-xl md:text-2xl text-charcoal group-hover:text-brand transition-colors mb-3 leading-tight">
+              {insight.title}
+            </h3>
+            
+            <p className="font-body text-base text-stone-700 leading-relaxed mb-4 flex-1">
+              {insight.excerpt}
+            </p>
+
+            <div className="flex items-center justify-between pt-4 border-t border-stone-200">
+              <span className="inline-flex items-center font-body text-brand group-hover:text-charcoal font-medium transition-colors text-sm">
+                {insight.type === "video" ? "Watch video" : "Read article"}
+                <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+              
+              {insight.type === "video" ? (
+                <span className="inline-flex items-center gap-1 font-body text-sm text-stone-500">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {insight.duration}
+                </span>
+              ) : (
+                <span className="font-body text-sm text-stone-500">
+                  {insight.readTime}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </Link>
