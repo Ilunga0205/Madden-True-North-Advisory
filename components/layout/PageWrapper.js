@@ -1,8 +1,8 @@
-export default function PageWrapper({ children, className = "" }) {
+export default function PageWrapper({ children, className = "", removePadding = false }) {
   return (
     <div className={`min-h-screen ${className}`}>
-      {/* Add top spacing to account for sticky navbar */}
-      <div className="pt-5">
+      {/* Add top spacing to account for sticky navbar - can be disabled */}
+      <div className={removePadding ? "" : "pt10"}>
         {children}
       </div>
     </div>

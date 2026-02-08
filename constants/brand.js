@@ -34,25 +34,24 @@ export const services = [
     id: "financial-clarity",
     title: "Financial Clarity & Strategy",
     description: "Accounting, bookkeeping, reporting, and forecasting to give you a clear view of where you stand and where you're headed.",
-    icon: "BarChart3", // or whatever icon you're using
+    icon: "TrendingUp", // Changed from BarChart3 to match your other services
     link: "/services/financial-clarity"
   },
   {
     id: "business-coaching",
     title: "Business & Decision Coaching",
     description: "Strategic thinking, leadership support, and clarity in direction to help you navigate complex decisions with confidence.",
-    icon: "Compass",
+    icon: "Target", // Keep as Target to match
     link: "/services/business-coaching"
   },
   {
     id: "resilience-wellbeing",
     title: "Resilience & Well-being Support",
     description: "Optional embodied and movement-based practices to support focus, energy, and sustainability in how you show up for your work.",
-    icon: "Heart",
+    icon: "Sprout", // Changed from Heart to Sprout to match your services page
     link: "/services/resilience-wellbeing"
   },
 ];
-
 // Insights Data
 export const insights = [
   {

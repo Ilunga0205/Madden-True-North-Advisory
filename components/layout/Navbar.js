@@ -55,7 +55,7 @@ export default function Navbar() {
               onClick={handleClick} 
               className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors cursor-pointer"
             >
-              Offers
+              Packages
             </a>
             <a 
               href="#" 
@@ -115,7 +115,7 @@ export default function Navbar() {
                 onClick={(e) => { handleClick(e); setOpen(false); }} 
                 className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors cursor-pointer py-2"
               >
-                Offers
+                Packages
               </a>
               <a 
                 href="#" 
