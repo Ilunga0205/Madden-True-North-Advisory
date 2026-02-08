@@ -209,7 +209,7 @@ export default function ContactPage() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full px-4 py-3 bg-white border-2 border-stone-300 rounded-lg font-body focus:border-brand focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-white border-2 border-stone-300 font-body focus:border-brand focus:outline-none transition-colors"
                         placeholder="Your full name"
                       />
                     </div>
@@ -223,7 +223,7 @@ export default function ContactPage() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full px-4 py-3 bg-white border-2 border-stone-300 rounded-lg font-body focus:border-brand focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-white border-2 border-stone-300 font-body focus:border-brand focus:outline-none transition-colors"
                         placeholder="your@email.com"
                       />
                     </div>
@@ -240,7 +240,7 @@ export default function ContactPage() {
                           max={maxDateString}
                           value={formData.date}
                           onChange={handleDateChange}
-                          className="w-full px-4 py-3 bg-white border-2 border-stone-300 rounded-lg font-body focus:border-brand focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-white border-2 border-stone-300 font-body focus:border-brand focus:outline-none transition-colors"
                         />
                       </div>
 
@@ -252,7 +252,7 @@ export default function ContactPage() {
                           required
                           value={formData.time}
                           onChange={(e) => setFormData({...formData, time: e.target.value})}
-                          className="w-full px-4 py-3 bg-white border-2 border-stone-300 rounded-lg font-body focus:border-brand focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full px-4 py-3 bg-white border-2 border-stone-300 font-body focus:border-brand focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                           disabled={!formData.date || loadingSlots}
                         >
                           <option value="">
@@ -276,7 +276,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={loading || !formData.time}
-                      className="w-full bg-brand text-white py-3.5 rounded-lg font-body font-semibold hover:bg-brand-hover transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6"
+                      className="w-full bg-brand text-white py-3.5 font-body font-semibold hover:bg-brand-hover transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6"
                     >
                       {loading ? (
                         <>

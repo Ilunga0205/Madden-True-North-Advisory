@@ -8,9 +8,8 @@ export default function Footer() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
           
-          
           {/* Brand Section */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
             <div className="mb-6">
               <Image 
                 src="/images/logowhite.png"
@@ -30,8 +29,7 @@ export default function Footer() {
               style={{ fontFamily: "'Montserrat', sans-serif" }}
               className="inline-flex items-center gap-2 text-[#8FA89A] font-semibold hover:gap-3 transition-all text-sm"
             >
-              <span>
-          {/*Book a consultation */}</span>
+              <span>Book a consultation</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -39,25 +37,46 @@ export default function Footer() {
           </div>
 
           {/* Navigation Links */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-2">
             <h4 style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm font-semibold text-white uppercase tracking-wider mb-6">
               Navigation
             </h4>
             <div className="flex flex-col gap-3">
               <Link href="/about" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
+                About
               </Link>
               <Link href="/services" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
-                  {/* Services */}
+                Services
               </Link>
-              <Link href="/offers" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
-                  {/* Offers */}
+              <Link href="/packages" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
+                Packages
               </Link>
               <Link href="/insights" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
-                  {/* Insights */}
+                Insights
               </Link>
               <Link href="/contact" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
-                 {/* Contact */}
-            
+                Contact
+              </Link>
+            </div>
+          </div>
+
+          {/* Services */}
+          <div className="lg:col-span-3">
+            <h4 style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm font-semibold text-white uppercase tracking-wider mb-6">
+              Our Services
+            </h4>
+            <div className="flex flex-col gap-3">
+              <Link href="/services#strategy" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
+                Strategy Development
+              </Link>
+              <Link href="/services#operations" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
+                Operations Optimization
+              </Link>
+              <Link href="/services#advisory" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
+                Executive Advisory
+              </Link>
+              <Link href="/services#transformation" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors">
+                Business Transformation
               </Link>
             </div>
           </div>
@@ -67,7 +86,7 @@ export default function Footer() {
             <h4 style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm font-semibold text-white uppercase tracking-wider mb-6">
               Connect
             </h4>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               <a 
                 href="mailto:info@truenorthadvisory.com"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
@@ -76,18 +95,48 @@ export default function Footer() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span>Email us</span>
+                <span>info@truenorthadvisory.com</span>
               </a>
+              
               <div style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400">
-                <p>Serving clients globally</p>
+                <p className="font-semibold text-white mb-2">Global Presence</p>
+                <p>Serving clients worldwide</p>
                 <p className="text-xs mt-1">5 continents • 100+ organizations</p>
+              </div>
+
+              <div style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400">
+                <p className="font-semibold text-white mb-2">Business Hours</p>
+                <p className="text-xs">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                <p className="text-xs">Consultations by appointment</p>
               </div>
             </div>
           </div>
         </div>
 
+        {/* Trust Indicators */}
+        <div className="py-8 border-y border-stone-800 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+              <div style={{ fontFamily: "'Playfair Display', serif" }} className="text-3xl font-semibold text-[#8FA89A] mb-1">15+</div>
+              <div style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-stone-500">Years of Excellence</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "'Playfair Display', serif" }} className="text-3xl font-semibold text-[#8FA89A] mb-1">100+</div>
+              <div style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-stone-500">Clients Served</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "'Playfair Display', serif" }} className="text-3xl font-semibold text-[#8FA89A] mb-1">5</div>
+              <div style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-stone-500">Continents</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "'Playfair Display', serif" }} className="text-3xl font-semibold text-[#8FA89A] mb-1">95%</div>
+              <div style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-stone-500">Client Satisfaction</div>
+            </div>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-stone-500">
             © {new Date().getFullYear()} Madden True North Advisory. All rights reserved.
           </p>
@@ -97,6 +146,9 @@ export default function Footer() {
             </Link>
             <Link href="/terms" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-stone-500 hover:text-[#8FA89A] transition-colors">
               Terms of Service
+            </Link>
+            <Link href="/sitemap" style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-stone-500 hover:text-[#8FA89A] transition-colors">
+              Sitemap
             </Link>
           </div>
         </div>
