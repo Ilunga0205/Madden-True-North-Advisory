@@ -9,8 +9,9 @@ export default function ServiceDetailCard({
   outcome,
   imageSrc,
   imageAlt,
-  imagePosition = "right", // "left" or "right"
-  link = "/contact"
+  imagePosition = "right",
+  link = "/contact",
+  outcomeBackground = "bg-[#F6F4F1]"
 }) {
   const contentOrder = imagePosition === "right" ? "order-2 md:order-1" : "order-2 md:order-2";
   const imageOrder = imagePosition === "right" ? "order-1 md:order-2" : "order-1 md:order-1";
@@ -40,7 +41,7 @@ export default function ServiceDetailCard({
           ))}
         </div>
 
-        <div className="p-6 bg-[#F6F4F1] border-l-4 border-[#8FA89A] mb-6">
+        <div className={`p-6 ${outcomeBackground} border-l-4 border-[#8FA89A] mb-6`}>
           <p className="font-body font-semibold text-[#1F1F1F] mb-1">Outcome:</p>
           <p className="font-body text-stone-700 italic">{outcome}</p>
         </div>

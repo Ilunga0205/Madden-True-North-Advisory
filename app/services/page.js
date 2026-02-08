@@ -59,7 +59,7 @@ export default function ServicesPage() {
 
         {/* Image Section - Peek visible from above */}
         <ImageWithOverlay
-          src="/images/service-alignment.jpg"
+          src="/images/Financialservicesandcoaching.jpg"
           alt="Financial services and coaching"
           quote="Clear numbers. Strategic thinking. Sustainable growth."
           addTopPadding={true}
@@ -83,6 +83,8 @@ export default function ServicesPage() {
                 imageSrc={service.imageSrc}
                 imageAlt={service.imageAlt}
                 imagePosition={service.imagePosition}
+                outcomeBackground={service.outcomeBackground}
+
               />
             </div>
           </section>

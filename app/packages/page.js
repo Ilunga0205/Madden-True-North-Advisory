@@ -40,12 +40,21 @@ export default function PackagesPage() {
   return (
     <main className="bg-white">
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+        
+        /* The Seasons font */
+        @font-face {
+          font-family: 'The Seasons';
+          src: url('https://assets.codepen.io/6060109/TheSeasons-Bd.otf') format('opentype');
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+        }
 
         .font-display {
-          font-family: 'Playfair Display', serif;
+          font-family: 'The Seasons', serif;
           letter-spacing: -0.02em;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .font-body {
@@ -83,6 +92,17 @@ export default function PackagesPage() {
           }
         }
 
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
         .animate-fadeInUp {
           opacity: 0;
           animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -98,6 +118,11 @@ export default function PackagesPage() {
           animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+        .animate-scaleIn {
+          opacity: 0;
+          animation: scaleIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
         .scroll-reveal {
           opacity: 0;
           transform: translateY(40px);
@@ -109,6 +134,7 @@ export default function PackagesPage() {
           transform: translateY(0);
         }
 
+        /* Brand Colors */
         .bg-brand {
           background-color: #8FA89A;
         }
@@ -119,6 +145,10 @@ export default function PackagesPage() {
 
         .border-brand {
           border-color: #8FA89A;
+        }
+
+        .bg-brand-light {
+          background-color: #E8EDE9;
         }
 
         .bg-warm-white {
@@ -139,6 +169,11 @@ export default function PackagesPage() {
 
         .text-taupe {
           color: #C6B8A5;
+        }
+
+        /* Parallax effect for hero image */
+        .parallax-image {
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
       `}</style>
 
@@ -198,7 +233,7 @@ export default function PackagesPage() {
       <section className="scroll-reveal">
         <div className="relative h-[400px] md:h-[500px]">
           <Image
-            src="/images/packages-hero.jpg"
+            src="/images/Financialplanningandstrategy.jpg"
             alt="Financial planning and strategy"
             fill
             className="object-cover"
@@ -280,7 +315,7 @@ export default function PackagesPage() {
             <div className="order-1 md:order-2">
               <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/images/foundation-package.jpg"
+                  src="/images/Foundationbookkeeping.jpg"
                   alt="Foundation bookkeeping"
                   fill
                   className="object-cover"
@@ -300,7 +335,7 @@ export default function PackagesPage() {
             <div>
               <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/images/growth-package.jpg"
+                  src="/images/Growth strategyandorecasting.jpg"
                   alt="Growth strategy and forecasting"
                   fill
                   className="object-cover"
@@ -440,7 +475,7 @@ export default function PackagesPage() {
               {/* Right - Image (2 columns) */}
               <div className="md:col-span-2 relative min-h-[300px] md:min-h-0">
                 <Image
-                  src="/images/advisory-package.jpg"
+                  src="/images/advisorypackage.jpg"
                   alt="CFO advisory services"
                   fill
                   className="object-cover"
@@ -471,7 +506,11 @@ export default function PackagesPage() {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="scroll-reveal bg-white p-8 border-l-4 border-brand" style={{ transitionDelay: "0.1s" }}>
-              <div className="text-4xl mb-4">🎯</div>
+              <div className="w-12 h-12 mb-4 text-brand">
+                <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                </svg>
+              </div>
               <h3 className="font-display text-2xl text-charcoal mb-3">
                 Mix & Match
               </h3>
@@ -481,7 +520,11 @@ export default function PackagesPage() {
             </div>
 
             <div className="scroll-reveal bg-white p-8 border-l-4 border-brand" style={{ transitionDelay: "0.2s" }}>
-              <div className="text-4xl mb-4">📈</div>
+              <div className="w-12 h-12 mb-4 text-brand">
+                <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                </svg>
+              </div>
               <h3 className="font-display text-2xl text-charcoal mb-3">
                 Scale Up or Down
               </h3>
@@ -491,7 +534,11 @@ export default function PackagesPage() {
             </div>
 
             <div className="scroll-reveal bg-white p-8 border-l-4 border-brand" style={{ transitionDelay: "0.3s" }}>
-              <div className="text-4xl mb-4">🤝</div>
+              <div className="w-12 h-12 mb-4 text-brand">
+                <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
               <h3 className="font-display text-2xl text-charcoal mb-3">
                 Project-Based
               </h3>
@@ -515,17 +562,15 @@ export default function PackagesPage() {
             Ready to get started?
           </div>
           
-        <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight">
-  Let&apos;s design
-  <br />
-  <span className="italic">your support</span>
-</h2>
-
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight">
+            Let&apos;s design
+            <br />
+            <span className="italic">your support</span>
+          </h2>
           
           <p className="font-body text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto">
-  Whether you choose a package or need something custom, we&apos;ll create the perfect financial support structure for your business.
-</p>
-
+            Whether you choose a package or need something custom, we&apos;ll create the perfect financial support structure for your business.
+          </p>
           
           <Link
             href="/contact"
@@ -539,21 +584,5 @@ export default function PackagesPage() {
         </div>
       </section>
     </main>
-  );
-}
-
-/* ---------- Components ---------- */
-
-function CustomizationCard({ icon, title, description }) {
-  return (
-    <div className="group bg-warm-white p-8 h-full border-l-4 border-transparent hover:border-brand transition-all">
-      <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="font-display text-2xl md:text-3xl mb-4 text-charcoal group-hover:text-brand transition-colors">
-        {title}
-      </h3>
-      <p className="font-body text-lg text-stone-700 leading-relaxed">
-        {description}
-      </p>
-    </div>
   );
 }

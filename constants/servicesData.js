@@ -112,7 +112,7 @@ export const detailedServicesNew = [
       'Support for international clients',
     ],
     outcome: 'Clear numbers, less overwhelm, better decisions.',
-    imageSrc: '/images/hero.jpg',
+    imageSrc: '/images/Accountingandfinancialmanagement.jpg',
     imageAlt: 'Accounting and financial management',
     imagePosition: 'right',
   },
@@ -128,9 +128,10 @@ export const detailedServicesNew = [
       'CFO-style advisory for small businesses',
     ],
     outcome: 'Strategic clarity and financial confidence.',
-    imageSrc: '/images/service-strategy.jpg',
+    imageSrc: '/images/Financialstrategyandadvisory.jpg',
     imageAlt: 'Financial strategy and advisory',
     imagePosition: 'left',
+    outcomeBackground: "bg-white" 
   },
 ];
 
@@ -163,7 +164,7 @@ export const resilienceService = {
     'Energy and focus support for business owners',
   ],
   outcome: 'Sustainable energy and resilience while building a business.',
-  imageSrc: '/images/service-governance.jpg',
+  imageSrc: '/images/Resilienceandembodiedsupport.jpg',
   imageAlt: 'Resilience and embodied support',
 };
 
