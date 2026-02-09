@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "True North Advisory",
+  title: "Madden True North Advisory", 
   description: "Clarity and grounded decision-making for sustainable growth",
 };
 

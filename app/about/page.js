@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { globalStyles } from "@/styles/globalStyles";
 
 export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -39,171 +40,7 @@ export default function AboutPage() {
 
   return (
     <main className="bg-white">
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
-
-        .font-display {
-          font-family: 'Playfair Display', serif;
-          letter-spacing: -0.02em;
-          font-weight: 600;
-        }
-
-        .font-body {
-          font-family: 'Montserrat', sans-serif;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes bounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(10px);
-          }
-        }
-
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.5;
-          }
-        }
-
-        .animate-fadeInUp {
-          opacity: 0;
-          animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-fadeIn {
-          opacity: 0;
-          animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-slideDown {
-          opacity: 0;
-          animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-bounce {
-          animation: bounce 2s ease-in-out infinite;
-        }
-
-        .animate-pulse {
-          animation: pulse 2s ease-in-out infinite;
-        }
-
-        .scroll-reveal {
-          opacity: 0;
-          transform: translateY(40px);
-          transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .scroll-reveal.revealed {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .bg-brand {
-          background-color: #8FA89A;
-        }
-
-        .text-brand {
-          color: #8FA89A;
-        }
-
-        .border-brand {
-          border-color: #8FA89A;
-        }
-
-        .bg-warm-white {
-          background-color: #F6F4F1;
-        }
-
-        .bg-charcoal {
-          background-color: #1F1F1F;
-        }
-
-        .text-charcoal {
-          color: #1F1F1F;
-        }
-
-        .bg-taupe {
-          background-color: #C6B8A5;
-        }
-
-        .text-taupe {
-          color: #C6B8A5;
-        }
-
-        /* Decorative scroll indicator */
-        .scroll-indicator {
-          position: relative;
-          width: 30px;
-          height: 50px;
-          border: 2px solid #8FA89A;
-          border-radius: 20px;
-        }
-
-        .scroll-indicator::before {
-          content: '';
-          position: absolute;
-          top: 8px;
-          left: 50%;
-          width: 4px;
-          height: 8px;
-          background: #8FA89A;
-          border-radius: 2px;
-          transform: translateX(-50%);
-          animation: scroll-down 2s ease-in-out infinite;
-        }
-
-        @keyframes scroll-down {
-          0% {
-            top: 8px;
-            opacity: 1;
-          }
-          50% {
-            top: 20px;
-            opacity: 0.5;
-          }
-          100% {
-            top: 8px;
-            opacity: 1;
-          }
-        }
-      `}</style>
+      <style jsx global>{globalStyles}</style>
 
       {/* Hero Section - Compact */}
       <section className="relative bg-warm-white overflow-hidden py-16 md:py-20">
@@ -225,7 +62,7 @@ export default function AboutPage() {
           {/* Description */}
           <div className="animate-fadeInUp mb-0" style={{ animationDelay: "0.3s" }}>
             <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
-              I&#39;m Inge Madden, founder of True North Advisory. I help business owners gain clarity, 
+              I&#39;m Inge Madden, founder of Madden True North Advisory. I help business owners gain clarity, 
               plan for sustainable growth, and lead with confidence.
             </p>
           </div>
