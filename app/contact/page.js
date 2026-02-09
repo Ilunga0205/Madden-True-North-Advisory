@@ -356,12 +356,13 @@ export default function ContactPage() {
                     <p className="font-body text-sm text-stone-600 mb-3">
                       We&#39;ll respond within 24 hours.
                     </p>
-                    
+              
+
                     <a
-                      href="mailto:info@truenorthadvisory.com"
+                      href="mailto:inge@maddentruenorthadvisory.com"
                       className="inline-flex items-center gap-2 font-body text-sm font-semibold text-brand hover:gap-3 transition-all group"
                     >
-                      <span>info@truenorthadvisory.com</span>
+                      <span>inge@maddentruenorthadvisory.com</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
