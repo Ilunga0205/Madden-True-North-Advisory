@@ -43,41 +43,28 @@ export default function InsightsPage() {
   const [loading, setLoading] = useState(true);
 
   // Fetch insights from Sanity
-  useEffect(() => {
-    const fetchInsights = async () => {
-      try {
-        const query = `*[_type == "insight"] | order(date desc) {
-          _id,
-          title,
-          slug,
-          excerpt,
-          category,
-          type,
-          image,
-          date,
-          readTime,
-          duration,
-          videoSource,
-          videoUrl,
-          videoFile,
-          isFeatured,
-          order
-        }`;
-        
-        const data = await client.fetch(query);
-        console.log("Fetched insights:", data);
-        console.log("Total insights:", data.length);
-        setInsights(data);
-        setFilteredInsights(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching insights:", error);
-        setLoading(false);
-      }
-    };
+useEffect(() => {
+  const fetchInsights = async () => {
+    try {
+      console.log('🔍 Fetching from API route...');
+      
+      const res = await fetch('/api/get-insights');
+      const { insights: data } = await res.json();
+      
+      console.log("✅ Raw data from API:", data);
+      console.log("📊 Number of documents:", data.length);
+      
+      setInsights(data);
+      setFilteredInsights(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("❌ Error:", error);
+      setLoading(false);
+    }
+  };
 
-    fetchInsights();
-  }, []);
+  fetchInsights();
+}, []);
 
   // Scroll reveal animation
   useEffect(() => {
