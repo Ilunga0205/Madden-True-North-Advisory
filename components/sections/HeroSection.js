@@ -96,7 +96,7 @@ export default function HeroSection({ scrollY }) {
               }}
             >
               <Image
-                src="/images/hero.jpg"
+                src="/images/herosectionnew.jpg"
                 alt="Financial and strategic advisory consultation"
                 fill
                 priority
