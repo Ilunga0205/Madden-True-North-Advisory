@@ -9,7 +9,6 @@ export default function Footer() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show button after scrolling down 300px
       setShowScrollTop(window.scrollY > 300);
     };
 
@@ -115,15 +114,15 @@ export default function Footer() {
               </h4>
               <div className="flex flex-col gap-4">
                 <a 
-  href="mailto:inge@maddentruenorthadvisory.com"
-  style={{ fontFamily: "'Montserrat', sans-serif" }}
-  className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors flex items-center gap-2"
->
-  <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-  </svg>
-  <span>inge@maddentruenorthadvisory.com</span>
-</a>
+                  href="mailto:inge@maddentruenorthadvisory.com"
+                  style={{ fontFamily: "'Montserrat', sans-serif" }}
+                  className="text-sm text-stone-400 hover:text-[#8FA89A] transition-colors flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span>inge@maddentruenorthadvisory.com</span>
+                </a>
                 
                 <div style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400">
                   <p className="font-semibold text-white mb-2">Global Presence</p>
@@ -135,6 +134,54 @@ export default function Footer() {
                   <p className="font-semibold text-white mb-2">Business Hours</p>
                   <p className="text-xs">Monday - Friday: 9:00 AM - 6:00 PM</p>
                   <p className="text-xs">Consultations by appointment</p>
+                </div>
+
+                {/* Social Media Icons */}
+                <div>
+                  <p style={{ fontFamily: "'Montserrat', sans-serif" }} className="font-semibold text-white mb-3 text-sm">Follow Us</p>
+                  <div className="flex items-center gap-3">
+                    {/* Facebook */}
+                    <a
+                      href="https://facebook.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Facebook"
+                      className="w-9 h-9 rounded-full bg-[#8FA89A] flex items-center justify-center hover:bg-[#7a9589] transition-colors duration-300"
+                    >
+                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                      </svg>
+                    </a>
+
+                    {/* LinkedIn */}
+                    <a
+                      href="https://linkedin.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                      className="w-9 h-9 rounded-full bg-[#8FA89A] flex items-center justify-center hover:bg-[#7a9589] transition-colors duration-300"
+                    >
+                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                        <circle cx="4" cy="4" r="2" />
+                      </svg>
+                    </a>
+
+                    {/* Instagram */}
+                    <a
+                      href="https://instagram.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Instagram"
+                      className="w-9 h-9 rounded-full bg-[#8FA89A] flex items-center justify-center hover:bg-[#7a9589] transition-colors duration-300"
+                    >
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <circle cx="12" cy="12" r="4" />
+                        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

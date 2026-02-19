@@ -6,6 +6,7 @@ import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from '@sanity/image-url';
 import { format } from "date-fns";
+import { globalStyles } from "@/styles/globalStyles";
 
 // Image URL builder
 const builder = imageUrlBuilder(client);
@@ -113,95 +114,7 @@ useEffect(() => {
 
   return (
     <main className="bg-white">
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
-
-        .font-display {
-          font-family: 'Playfair Display', serif;
-          letter-spacing: -0.02em;
-          font-weight: 600;
-        }
-
-        .font-body {
-          font-family: 'Montserrat', sans-serif;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fadeInUp {
-          opacity: 0;
-          animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-slideDown {
-          opacity: 0;
-          animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .scroll-reveal {
-          opacity: 0;
-          transform: translateY(40px);
-          transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .scroll-reveal.revealed {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .bg-brand {
-          background-color: #8FA89A;
-        }
-
-        .text-brand {
-          color: #8FA89A;
-        }
-
-        .border-brand {
-          border-color: #8FA89A;
-        }
-
-        .bg-warm-white {
-          background-color: #F6F4F1;
-        }
-
-        .bg-charcoal {
-          background-color: #1F1F1F;
-        }
-
-        .text-charcoal {
-          color: #1F1F1F;
-        }
-
-        .filter-btn {
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .filter-btn.active {
-          background-color: #8FA89A;
-          color: white;
-        }
-      `}</style>
+      <style jsx global>{globalStyles}</style>
 
       {/* Hero Section */}
       <section className="relative bg-warm-white overflow-hidden py-20 md:py-24">
@@ -495,11 +408,19 @@ function VideoPlayer({ insight }) {
 }
 
 function FeaturedInsight({ insight }) {
-  const imageUrl = insight.image ? urlFor(insight.image).width(800).height(600).url() : '/images/placeholder.jpg';
+  const getImageSrc = () => {
+    if (insight.type === 'video' && insight.videoSource === 'youtube' && insight.videoUrl) {
+      const videoId = getYouTubeVideoId(insight.videoUrl);
+      if (videoId) return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    }
+    return insight.image ? urlFor(insight.image).width(800).height(600).url() : '/images/placeholder.jpg';
+  };
+
+  const imageUrl = getImageSrc();
   const formattedDate = format(new Date(insight.date), 'MMMM yyyy');
 
   return (
-    <Link href={`/insights/${insight.slug.current}`}>
+    <Link href={`/insights/${insight.slug}`}>
       <div className="group relative bg-white border border-stone-200 hover:border-brand overflow-hidden hover:shadow-xl transition-all">
         <div className="grid md:grid-cols-2 gap-0">
           {/* Image/Video */}
@@ -510,7 +431,23 @@ function FeaturedInsight({ insight }) {
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            {insight.type === "video" && <VideoPlayer insight={insight} />}
+            {insight.type === "video" && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-full bg-white/30 scale-150 group-hover:scale-[1.8] transition-transform duration-500" />
+                  <div className="relative w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-7 h-7 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+                {insight.duration && (
+                  <span className="absolute bottom-3 right-3 px-2 py-1 bg-black/70 text-white font-body text-xs rounded">
+                    {insight.duration}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Content */}
@@ -541,7 +478,7 @@ function FeaturedInsight({ insight }) {
             <h3 className="font-display text-3xl md:text-4xl text-charcoal group-hover:text-brand transition-colors mb-4 leading-tight">
               {insight.title}
             </h3>
-            
+
             <p className="font-body text-lg text-stone-700 leading-relaxed mb-6">
               {insight.excerpt}
             </p>
@@ -560,12 +497,20 @@ function FeaturedInsight({ insight }) {
 }
 
 function InsightCard({ insight, index }) {
-  const imageUrl = insight.image ? urlFor(insight.image).width(600).height(400).url() : '/images/placeholder.jpg';
+  const getImageSrc = () => {
+    if (insight.type === 'video' && insight.videoSource === 'youtube' && insight.videoUrl) {
+      const videoId = getYouTubeVideoId(insight.videoUrl);
+      if (videoId) return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    }
+    return insight.image ? urlFor(insight.image).width(600).height(400).url() : '/images/placeholder.jpg';
+  };
+
+  const imageUrl = getImageSrc();
   const formattedDate = format(new Date(insight.date), 'MMMM yyyy');
 
   return (
     <article className="scroll-reveal group" style={{ transitionDelay: `${index * 0.1}s` }}>
-      <Link href={`/insights/${insight.slug.current}`}>
+      <Link href={`/insights/${insight.slug}`}>
         <div className="bg-white border border-stone-200 hover:border-brand hover:shadow-lg transition-all overflow-hidden h-full flex flex-col">
           {/* Image/Video */}
           <div className="relative h-[240px] overflow-hidden">
@@ -576,12 +521,20 @@ function InsightCard({ insight, index }) {
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
             {insight.type === "video" && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                <div className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-5 h-5 text-brand ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-full bg-white/30 scale-150 group-hover:scale-[1.8] transition-transform duration-500" />
+                  <div className="relative w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-6 h-6 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
                 </div>
+                {insight.duration && (
+                  <span className="absolute bottom-3 right-3 px-2 py-1 bg-black/70 text-white font-body text-xs rounded">
+                    {insight.duration}
+                  </span>
+                )}
               </div>
             )}
           </div>
@@ -600,7 +553,7 @@ function InsightCard({ insight, index }) {
             <h3 className="font-display text-xl md:text-2xl text-charcoal group-hover:text-brand transition-colors mb-3 leading-tight">
               {insight.title}
             </h3>
-            
+
             <p className="font-body text-base text-stone-700 leading-relaxed mb-4 flex-1">
               {insight.excerpt}
             </p>
@@ -612,7 +565,7 @@ function InsightCard({ insight, index }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
-              
+
               {insight.type === "video" && insight.duration ? (
                 <span className="inline-flex items-center gap-1 font-body text-sm text-stone-500">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

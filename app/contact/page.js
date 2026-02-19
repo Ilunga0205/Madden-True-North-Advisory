@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { globalStyles } from "@/styles/globalStyles";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -119,62 +120,27 @@ export default function ContactPage() {
 
   return (
     <main className="bg-white min-h-screen">
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
-
-        .font-display {
-          font-family: 'Playfair Display', serif;
-          letter-spacing: -0.02em;
-          font-weight: 600;
-        }
-
-        .font-body {
-          font-family: 'Montserrat', sans-serif;
-        }
-
-        .bg-brand {
-          background-color: #8FA89A;
-        }
-
-        .text-brand {
-          color: #8FA89A;
-        }
-
-        .border-brand {
-          border-color: #8FA89A;
-        }
-
-        .bg-warm-white {
-          background-color: #F6F4F1;
-        }
-
-        .text-charcoal {
-          color: #1F1F1F;
-        }
-
-        .hover\\:bg-brand-hover:hover {
-          background-color: #7a9284;
-        }
-
-        .bg-brand-light {
-          background-color: #E8EDE9;
-        }
-      `}</style>
-
+      <style jsx global>{globalStyles}</style>
       {/* Compact Hero Section */}
       <section className="pt-20 pb-12 sm:pt-24 sm:pb-16 bg-warm-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="inline-block px-4 py-2 bg-brand text-white font-body text-xs sm:text-sm font-semibold rounded-full mb-6">
-              Let&#39;s Connect
-            </div>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-charcoal leading-tight mb-4">
-              Book a <span className="text-brand italic">consultation</span>
-            </h1>
-            <p className="font-body text-base sm:text-lg text-stone-600 leading-relaxed max-w-xl mx-auto">
-              Schedule a confidential consultation to discuss your needs and explore how we can support you.
-            </p>
-          </div>
+  <div className="animate-slideDown" style={{ animationDelay: "0.1s" }}>
+    <div className="inline-block px-4 py-2 bg-brand text-white font-body text-xs sm:text-sm font-semibold rounded-full mb-6">
+      Let&#39;s Connect
+    </div>
+  </div>
+  <div className="animate-fadeInUp" style={{ animationDelay: "0.2s" }}>
+    <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-charcoal leading-tight mb-4">
+      Book a <span className="text-brand italic">consultation</span>
+    </h1>
+  </div>
+  <div className="animate-fadeInUp" style={{ animationDelay: "0.3s" }}>
+    <p className="font-body text-base sm:text-lg text-stone-600 leading-relaxed max-w-xl mx-auto">
+      Schedule a confidential consultation to discuss your needs and explore how we can support you.
+    </p>
+  </div>
+</div>
         </div>
       </section>
 
