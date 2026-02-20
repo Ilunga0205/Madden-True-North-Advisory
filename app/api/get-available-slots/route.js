@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
 import { client } from '@/sanity/lib/client';
-// Updated: uses blockedDates array in availability doc (no separate vacation doc needed)
+import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 
 export async function POST(request) {
   try {
@@ -21,8 +21,6 @@ export async function POST(request) {
       }
     `);
 
-    console.log('⚙️ Sanity settings:', settings);
-
     if (!settings) {
       return Response.json({ 
         error: 'Availability not configured. Please set up in Sanity.' 
@@ -31,17 +29,15 @@ export async function POST(request) {
 
     const tz = settings.timezone || 'Africa/Johannesburg';
 
-    // ── Check blockedDates from availability settings ──
+    // ── Check blockedDates ──
     if (settings.blockedDates && settings.blockedDates.includes(date)) {
-      console.log('🚫 Date is blocked via blockedDates');
-      return Response.json({ slots: [], message: 'This date is not available' });
+      return Response.json({ slots: [], message: 'Not available on this date' });
     }
 
     // ── Check max advance booking days ──
-    const selectedDate = new Date(date + 'T00:00:00');
+    const selectedDate = new Date(date + 'T12:00:00');
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() + (settings.maxAdvanceBookingDays || 90));
-    
     if (selectedDate > maxDate) {
       return Response.json({ 
         slots: [], 
@@ -50,11 +46,10 @@ export async function POST(request) {
     }
 
     // ── Check if it's a work day ──
-    // Use date + T12:00:00 to avoid any timezone day-shift when getting day name
     const dayCheck = new Date(date + 'T12:00:00');
     const dayName = dayCheck.toLocaleDateString('en-US', { weekday: 'long' });
-    console.log('📋 Day name:', dayName, '| Work days:', settings.workDays);
-    
+    console.log('📋 Day:', dayName, '| Work days:', settings.workDays);
+
     if (!settings.workDays.includes(dayName)) {
       return Response.json({ slots: [], message: 'Not available on this day' });
     }
@@ -65,101 +60,92 @@ export async function POST(request) {
       process.env.GOOGLE_CLIENT_SECRET,
       process.env.GOOGLE_REDIRECT_URI
     );
-
-    oauth2Client.setCredentials({
-      refresh_token: process.env.GOOGLE_REFRESH_TOKEN
-    });
-
+    oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
     const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 
-    // ── Fetch Google Calendar events for the day ──
-    // Use explicit timezone-aware boundaries to avoid day-shift bug
-    const [startHour, startMin] = settings.startTime.split(':').map(Number);
-    const [endHour, endMin] = settings.endTime.split(':').map(Number);
+    // ── Fetch Google Calendar events ──
+    // fromZonedTime converts SAST time to UTC for the API query
+    const dayStartUTC = fromZonedTime(`${date}T00:00:00`, tz);
+    const dayEndUTC = fromZonedTime(`${date}T23:59:59`, tz);
 
-    // Build time boundaries in the correct timezone using the date string directly
-    const timeMin = new Date(`${date}T00:00:00`);
-    const timeMax = new Date(`${date}T23:59:59`);
-
-    console.log('📅 Fetching Google Calendar events between:', timeMin.toISOString(), '-', timeMax.toISOString());
+    console.log('📅 Querying Google between:', dayStartUTC.toISOString(), '->', dayEndUTC.toISOString());
 
     const eventsResponse = await calendar.events.list({
       calendarId: 'primary',
-      timeMin: timeMin.toISOString(),
-      timeMax: timeMax.toISOString(),
+      timeMin: dayStartUTC.toISOString(),
+      timeMax: dayEndUTC.toISOString(),
       singleEvents: true,
       orderBy: 'startTime',
       timeZone: tz,
     });
 
     const googleEvents = eventsResponse.data.items || [];
-    console.log('📊 Google Calendar events found:', googleEvents.length);
-    googleEvents.forEach(e => console.log(' -', e.summary, e.start.dateTime || e.start.date));
+    console.log('📊 Google events found:', googleEvents.length);
+    googleEvents.forEach(e => console.log(' -', e.summary, '|', e.start.dateTime || e.start.date, '| transparency:', e.transparency || 'busy'));
 
-   // Only block slots for events marked as 'busy' (ignore 'free' events)
-const bookedSlots = googleEvents
-  .filter(event => event.transparency !== 'transparent') // 'transparent' = Free in Google
-  .map(event => ({
-    start: new Date(event.start.dateTime || event.start.date + 'T00:00:00'),
-    end: new Date(event.end.dateTime || event.end.date + 'T00:00:00'),
-  }));
+    // Only block slots marked as busy (filter out 'Free' events)
+    const bookedSlots = googleEvents
+      .filter(event => event.transparency !== 'transparent')
+      .map(event => ({
+        start: new Date(event.start.dateTime || event.start.date + 'T00:00:00'),
+        end: new Date(event.end.dateTime || event.end.date + 'T00:00:00'),
+      }));
 
-    // ── Also fetch confirmed bookings from Sanity as a fallback ──
+    // ── Fetch confirmed Sanity bookings as fallback ──
     const sanityBookings = await client.fetch(`
       *[_type == "booking" && bookingDate == $date && status == "confirmed"]{
         bookingTime
       }
     `, { date });
 
-    console.log('📊 Sanity bookings found:', sanityBookings.length);
+    console.log('📊 Sanity bookings:', sanityBookings.length);
 
-    // ── Generate available time slots ──
+    // ── Generate slots in SAST using date-fns-tz ──
     const slots = [];
     const now = new Date();
 
-    let currentTime = new Date(`${date}T${settings.startTime}:00`);
-    const endTime = new Date(`${date}T${settings.endTime}:00`);
+    // fromZonedTime: converts SAST slot times to UTC for accurate comparison
+    let currentUTC = fromZonedTime(`${date}T${settings.startTime}:00`, tz);
+    const endUTC = fromZonedTime(`${date}T${settings.endTime}:00`, tz);
 
-    while (currentTime < endTime) {
-      const slotEnd = new Date(currentTime.getTime() + settings.slotDuration * 60000);
+    while (currentUTC < endUTC) {
+      const slotEnd = new Date(currentUTC.getTime() + settings.slotDuration * 60000);
 
-      if (slotEnd > endTime) break;
+      if (slotEnd > endUTC) break;
 
-      const timeStr = currentTime.toTimeString().slice(0, 5); // e.g. "09:00"
+      // toZonedTime: converts UTC back to SAST for display
+      const localTime = toZonedTime(currentUTC, tz);
+      const timeStr = `${String(localTime.getHours()).padStart(2, '0')}:${String(localTime.getMinutes()).padStart(2, '0')}`;
 
-      // Check against Google Calendar events
       const blockedByGoogle = bookedSlots.some(booked =>
-        (currentTime >= booked.start && currentTime < booked.end) ||
+        (currentUTC >= booked.start && currentUTC < booked.end) ||
         (slotEnd > booked.start && slotEnd <= booked.end) ||
-        (currentTime <= booked.start && slotEnd >= booked.end)
+        (currentUTC <= booked.start && slotEnd >= booked.end)
       );
 
-      // Check against Sanity bookings
       const blockedBySanity = sanityBookings.some(b => b.bookingTime === timeStr);
-
-      // Check if slot is in the past
-      const isPast = currentTime <= now;
+      const isPast = currentUTC <= now;
 
       if (!blockedByGoogle && !blockedBySanity && !isPast) {
         slots.push({
           time: timeStr,
-          display: currentTime.toLocaleTimeString('en-US', { 
-            hour: 'numeric', 
+          display: localTime.toLocaleTimeString('en-US', {
+            hour: 'numeric',
             minute: '2-digit',
-            hour12: true 
+            hour12: true
           }),
           available: true
         });
       }
 
-      currentTime = new Date(currentTime.getTime() + (settings.slotDuration + (settings.bufferTime || 0)) * 60000);
+      currentUTC = new Date(currentUTC.getTime() + (settings.slotDuration + (settings.bufferTime || 0)) * 60000);
     }
 
-    console.log('✅ Available slots generated:', slots.length);
+    console.log('✅ Available slots:', slots.length);
     return Response.json({ slots });
 
   } catch (error) {
-    console.error('💥 Error getting slots:', error.message);
+    console.error('💥 Error:', error.message);
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
