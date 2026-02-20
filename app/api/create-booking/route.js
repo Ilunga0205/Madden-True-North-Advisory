@@ -124,9 +124,9 @@ export async function POST(request) {
     // ── Add to Mailchimp after successful booking ──
     // We don't await or throw on failure — a Mailchimp hiccup should
     // never block a confirmed booking from returning success to the user.
-    subscribeToMailchimp(name, email, ['Consultation Booking']).catch((err) => {
-      console.error('⚠️ Mailchimp sync failed (booking still confirmed):', err);
-    });
+    subscribeToMailchimp(email, name, ['Consultation Booking']).catch((err) => {
+  console.error('⚠️ Mailchimp sync failed (booking still confirmed):', err);
+});
 
     return Response.json({ 
       success: true, 
