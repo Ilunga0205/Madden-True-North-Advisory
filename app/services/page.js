@@ -59,7 +59,7 @@ export default function ServicesPage() {
 
         {/* Image Section - Peek visible from above */}
         <ImageWithOverlay
-          src="/images/Financialservicesandcoaching.jpg"
+          src="/images/servicepic.jpg"
           alt="Financial services and coaching"
           quote="Clear numbers. Strategic thinking. Sustainable growth."
           addTopPadding={true}

@@ -40,10 +40,50 @@ async function getInsight(slug) {
     videoSource,
     videoUrl,
     videoFile,
+    articleSource,
+    articleUrl,
     isFeatured,
     body
   }`;
   return client.fetch(query, { slug });
+}
+
+async function getRelated(slug, category) {
+  const query = `*[_type == "insight" && slug.current != $slug && category == $category] | order(date desc)[0..2] {
+    _id,
+    title,
+    "slug": slug.current,
+    excerpt,
+    category,
+    type,
+    date,
+    readTime,
+    duration,
+  }`;
+  return client.fetch(query, { slug, category });
+}
+
+// Fetch OG image server-side — runs at request time, cached for 24h
+async function getOgImage(url) {
+  try {
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' },
+      next: { revalidate: 86400 },
+    });
+    const html = await res.text();
+
+    const match =
+      html.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
+      html.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i);
+
+    const image = match?.[1] || null;
+    if (!image) return null;
+
+    // Resolve relative URLs
+    return image.startsWith('http') ? image : new URL(image, url).href;
+  } catch {
+    return null;
+  }
 }
 
 export default async function InsightPage({ params }) {
@@ -53,9 +93,17 @@ export default async function InsightPage({ params }) {
   if (!insight) notFound();
 
   const formattedDate = format(new Date(insight.date), 'MMMM d, yyyy');
-  const imageUrl = insight.image
+
+  const isExternalArticle = insight.type === 'article' && insight.articleSource === 'link' && insight.articleUrl;
+
+  // For external articles: use Sanity image if uploaded, otherwise auto-fetch OG image
+  let imageUrl = insight.image
     ? urlFor(insight.image).width(1200).height(630).url()
     : null;
+
+  if (isExternalArticle && !imageUrl) {
+    imageUrl = await getOgImage(insight.articleUrl);
+  }
 
   const youtubeId = insight.videoSource === 'youtube'
     ? getYouTubeVideoId(insight.videoUrl)
@@ -65,18 +113,33 @@ export default async function InsightPage({ params }) {
     ? getVideoFileUrl(insight.videoFile)
     : null;
 
+  const related = await getRelated(slug, insight.category);
+
   return (
     <main className="bg-white min-h-screen">
-     
 
-      {/* Back link */}
-      <div className="bg-warm-white border-b border-stone-200">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 py-4">
+      {/* Font definitions */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+        @font-face {
+          font-family: 'The Seasons';
+          src: url('https://assets.codepen.io/6060109/TheSeasons-Bd.otf') format('opentype');
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+        }
+        .font-display { font-family: 'The Seasons', serif; letter-spacing: -0.02em; font-weight: 700; }
+        .font-body { font-family: 'Montserrat', sans-serif; }
+      `}</style>
+
+      {/* Back navigation */}
+      <div className="bg-[#F6F4F1] border-b border-stone-200">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-4">
           <Link
             href="/insights"
-            className="inline-flex items-center font-body text-sm text-stone-600 hover:text-brand transition-colors"
+            className="inline-flex items-center font-body text-sm text-stone-500 hover:text-[#8FA89A] transition-colors group"
           >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Insights
@@ -84,11 +147,11 @@ export default async function InsightPage({ params }) {
         </div>
       </div>
 
-      {/* Header */}
-      <section className="bg-warm-white py-16 md:py-24">
+      {/* Hero header */}
+      <section className="bg-[#F6F4F1] py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="inline-block px-3 py-1 bg-brand text-white font-body text-xs font-semibold rounded-full">
+          <div className="flex flex-wrap items-center gap-3 mb-8">
+            <span className="inline-block px-3 py-1 bg-[#8FA89A] text-white font-body text-xs font-semibold rounded-full">
               {insight.category}
             </span>
             <span className="font-body text-sm text-stone-500">{formattedDate}</span>
@@ -103,21 +166,68 @@ export default async function InsightPage({ params }) {
             {insight.type === 'article' && insight.readTime && (
               <span className="font-body text-sm text-stone-500">{insight.readTime}</span>
             )}
+            {isExternalArticle && (
+              <span className="inline-flex items-center gap-1 font-body text-xs text-stone-400">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                External article
+              </span>
+            )}
           </div>
 
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight mb-6">
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[#1F1F1F] leading-[1.1] mb-6">
             {insight.title}
           </h1>
 
-          <p className="font-body text-xl text-stone-600 leading-relaxed max-w-3xl">
-            {insight.excerpt}
-          </p>
+          <div className="border-l-4 border-[#8FA89A] pl-6 mb-10">
+            <p className="font-body text-lg md:text-xl text-stone-600 leading-relaxed">
+              {insight.excerpt}
+            </p>
+          </div>
+
+          {/* External article CTA */}
+          {isExternalArticle && (
+            <div>
+              <a
+                href={insight.articleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-[#8FA89A] text-white font-body font-semibold hover:bg-[#7a9284] transition-all"
+              >
+                <span>Read full article</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+              <p className="font-body text-xs text-stone-400 mt-3">
+                Opens in a new tab · {new URL(insight.articleUrl).hostname.replace('www.', '')}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Video Player — YouTube */}
+      {/* Cover image — auto OG or manually uploaded */}
+      {imageUrl && (
+        <section className="max-w-5xl mx-auto px-6 md:px-12 py-12">
+          <div className="relative h-[400px] md:h-[520px] overflow-hidden">
+            <Image
+              src={imageUrl}
+              alt={insight.title}
+              fill
+              className="object-cover object-top"
+              priority
+              // OG images come from external domains — unoptimized avoids Next.js domain config
+              unoptimized={isExternalArticle && !insight.image}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Video — YouTube */}
       {insight.type === 'video' && youtubeId && (
-        <section className="bg-black">
+        <section className="bg-[#1F1F1F]">
           <div className="max-w-5xl mx-auto">
             <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
               <iframe
@@ -133,45 +243,22 @@ export default async function InsightPage({ params }) {
         </section>
       )}
 
-      {/* Video Player — Uploaded file */}
+      {/* Video — Uploaded file */}
       {insight.type === 'video' && uploadedVideoUrl && (
-        <section className="bg-black">
+        <section className="bg-[#1F1F1F]">
           <div className="max-w-5xl mx-auto">
-            <video
-              className="w-full"
-              controls
-              poster={imageUrl || undefined}
-            >
+            <video className="w-full" controls poster={imageUrl || undefined}>
               <source src={uploadedVideoUrl} type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
           </div>
         </section>
       )}
 
-      {/* Cover image — articles only */}
-      {insight.type === 'article' && imageUrl && (
+      {/* Written article body */}
+      {insight.type === 'article' && !isExternalArticle && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
-          <div className="relative h-[400px] md:h-[500px] overflow-hidden rounded-sm">
-            <Image
-              src={imageUrl}
-              alt={insight.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        </section>
-      )}
-
-      {/* Article body */}
-      {insight.type === 'article' && (
-        <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
-          <div className="prose-insight max-w-3xl">
+          <div className="max-w-3xl">
             {insight.body ? (
-              // If you have @portabletext/react installed:
-              // <PortableText value={insight.body} />
-              // Otherwise a temporary fallback:
               <p className="font-body text-stone-600 italic">
                 Article body will render here — install @portabletext/react and add the PortableText component.
               </p>
@@ -182,21 +269,75 @@ export default async function InsightPage({ params }) {
         </section>
       )}
 
+      {/* Related insights */}
+      {related?.length > 0 && (
+        <section className="border-t border-stone-200 py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="mb-10">
+              <span className="inline-block text-[#8FA89A] font-body text-xs font-semibold tracking-wider uppercase mb-2">
+                More in {insight.category}
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl text-[#1F1F1F]">
+                Related insights
+              </h2>
+            </div>
+            <div className="space-y-4">
+              {related.map((item) => (
+                <Link
+                  key={item._id}
+                  href={`/insights/${item.slug}`}
+                  className="group block bg-[#F6F4F1] p-6 sm:p-8 border-l-4 border-[#8FA89A] hover:bg-[#E8EDE9] transition-all"
+                >
+                  <div className="flex items-start justify-between gap-6">
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
+                        <span className="inline-block px-3 py-1 bg-[#8FA89A] text-white font-body text-xs font-semibold rounded-full">
+                          {item.category}
+                        </span>
+                        <span className="font-body text-sm text-stone-500">
+                          {format(new Date(item.date), 'MMMM yyyy')}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-xl sm:text-2xl text-[#1F1F1F] group-hover:text-[#8FA89A] transition-colors mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="font-body text-sm text-stone-600 leading-relaxed">{item.excerpt}</p>
+                    </div>
+                    <svg className="w-5 h-5 text-[#8FA89A] flex-shrink-0 group-hover:translate-x-2 transition-transform mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Footer CTA */}
-      <section className="bg-warm-white border-t border-stone-200 py-20 mt-16">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">
-            Explore more insights
+      <section className="relative py-32 overflow-hidden bg-[#8FA89A]">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl" />
+        </div>
+        <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-center">
+          <div className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm text-white/90 font-body text-sm font-medium rounded-full mb-8">
+            Explore more
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+            More perspectives
+            <br />
+            <span className="italic">worth reading</span>
           </h2>
-          <p className="font-body text-lg text-stone-600 mb-8">
-            More perspectives on leadership, strategy, and governance.
+          <p className="font-body text-lg text-white/80 mb-10 leading-relaxed max-w-xl mx-auto">
+            Articles and videos on leadership, strategy, and navigating complexity.
           </p>
           <Link
             href="/insights"
-            className="inline-flex items-center px-8 py-4 bg-brand text-white font-body font-semibold hover:bg-brand/90 transition-all"
+            className="group inline-flex items-center justify-center px-8 py-4 bg-white text-[#8FA89A] font-body font-semibold hover:bg-white/90 transition-all"
           >
-            View all insights
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span>View all insights</span>
+            <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>

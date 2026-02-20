@@ -83,7 +83,6 @@ const insight = {
       description: 'e.g., "12 min"',
       hidden: ({document}) => document?.type === 'article'
     },
-    // NEW: Video source type
     {
       name: 'videoSource',
       title: 'Video Source',
@@ -103,7 +102,6 @@ const insight = {
         return true
       })
     },
-    // YouTube URL field
     {
       name: 'videoUrl',
       title: 'YouTube Video URL',
@@ -120,7 +118,6 @@ const insight = {
         return true
       })
     },
-    // NEW: Video file upload field
     {
       name: 'videoFile',
       title: 'Video File',
@@ -137,6 +134,40 @@ const insight = {
         return true
       })
     },
+    // ── Article source ──────────────────────────────────────────────
+    {
+      name: 'articleSource',
+      title: 'Article Source',
+      type: 'string',
+      description: 'Choose how to provide the article content',
+      options: {
+        list: [
+          {title: 'Write content here', value: 'write'},
+          {title: 'Link to external article', value: 'link'},
+        ],
+        layout: 'radio'
+      },
+      initialValue: 'write',
+      hidden: ({document}) => document?.type === 'video',
+    },
+    {
+      name: 'articleUrl',
+      title: 'External Article URL',
+      type: 'url',
+      description: 'Paste the full URL of the article (e.g., https://medium.com/your-article)',
+      hidden: ({document}) => document?.type === 'video' || document?.articleSource !== 'link',
+      validation: Rule => Rule.custom((url, context) => {
+        if (
+          context.document?.type === 'article' &&
+          context.document?.articleSource === 'link' &&
+          !url
+        ) {
+          return 'Please provide the article URL'
+        }
+        return true
+      })
+    },
+    // ────────────────────────────────────────────────────────────────
     {
       name: 'content',
       title: 'Content',
@@ -176,7 +207,7 @@ const insight = {
           options: {hotspot: true}
         }
       ],
-      hidden: ({document}) => document?.type === 'video'
+      hidden: ({document}) => document?.type === 'video' || document?.articleSource === 'link',
     },
     {
       name: 'isFeatured',
@@ -199,34 +230,27 @@ const insight = {
       category: 'category',
       media: 'image',
       type: 'type',
-      videoSource: 'videoSource'
+      videoSource: 'videoSource',
+      articleSource: 'articleSource',
     },
     prepare(selection) {
-      const {title, category, media, type, videoSource} = selection
-      const subtitle = type === 'video' 
-        ? `${category} • ${type} (${videoSource || 'N/A'})`
-        : `${category} • ${type}`
-      return {
-        title: title,
-        subtitle: subtitle,
-        media: media
-      }
+      const {title, category, media, type, videoSource, articleSource} = selection
+      let subtitle = `${category} • ${type}`
+      if (type === 'video') subtitle += ` (${videoSource || 'N/A'})`
+      if (type === 'article' && articleSource === 'link') subtitle += ' • external link'
+      return { title, subtitle, media }
     }
   },
   orderings: [
     {
       title: 'Publish Date, Newest',
       name: 'dateDesc',
-      by: [
-        {field: 'date', direction: 'desc'}
-      ]
+      by: [{ field: 'date', direction: 'desc' }]
     },
     {
       title: 'Display Order',
       name: 'orderAsc',
-      by: [
-        {field: 'order', direction: 'asc'}
-      ]
+      by: [{ field: 'order', direction: 'asc' }]
     }
   ]
 }

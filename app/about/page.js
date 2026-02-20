@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { globalStyles } from "@/styles/globalStyles";
+import ImageWithOverlay from "@/components/ui/ImageWithOverlay";
 
 export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -45,21 +45,18 @@ export default function AboutPage() {
       {/* Hero Section - Compact */}
       <section className="relative bg-warm-white overflow-hidden py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          {/* Tag */}
           <div className="animate-slideDown mb-4" style={{ animationDelay: "0.1s" }}>
             <span className="inline-block text-brand font-body text-sm font-semibold tracking-wider uppercase">
               About Inge Madden
             </span>
           </div>
 
-          {/* Main Headline */}
           <div className="animate-fadeInUp mb-6" style={{ animationDelay: "0.2s" }}>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.1]">
               Financial clarity meets <span className="text-brand italic">human insight</span>
             </h1>
           </div>
 
-          {/* Description */}
           <div className="animate-fadeInUp mb-0" style={{ animationDelay: "0.3s" }}>
             <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
               I&#39;m Inge Madden, founder of Madden True North Advisory. I help business owners gain clarity, 
@@ -72,7 +69,6 @@ export default function AboutPage() {
       {/* Scroll Teaser Section */}
       <section className="relative bg-warm-white pt-4 pb-6">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          {/* Teaser Cards - Peek at content below */}
           <div className="grid md:grid-cols-3 gap-6 mb-4">
             <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
               <div className="text-brand font-display text-4xl mb-2">01</div>
@@ -95,34 +91,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Image Section */}
-      <section className="scroll-reveal">
-        <div className="relative h-[400px] md:h-[500px]">
-          <Image
-            src="/images/aboutpic.jpg"
-            alt="Inge Madden - True North Advisory"
-            fill
-            className="object-cover"
-            quality={100}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
-          
-          {/* Overlay text on image */}
-          <div className="absolute inset-0 flex items-end justify-center pb-12">
-            <div className="text-center">
-              <p className="font-display text-white text-2xl md:text-3xl italic">
-                &quot;True growth is about understanding priorities and making deliberate choices&quot;
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Image Section — now uses shared component */}
+      <ImageWithOverlay
+        src="/images/aboutpic1.jpg"
+        alt="Inge Madden - True North Advisory"
+        quote="True growth is about understanding priorities and making deliberate choices"
+      />
 
       {/* Philosophy Section */}
       <section className="py-32 scroll-reveal bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-5 gap-16 items-start">
-            {/* Left - Heading */}
             <div className="md:col-span-2">
               <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-6">
                 My journey
@@ -132,7 +111,6 @@ export default function AboutPage() {
               </h2>
             </div>
 
-            {/* Right - Content */}
             <div className="md:col-span-3 space-y-8">
               <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
                 I began my career in accounting and finance, working with international clients 
