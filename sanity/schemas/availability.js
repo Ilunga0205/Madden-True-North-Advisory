@@ -75,13 +75,14 @@ const availability = {
       title: 'Meeting Duration (minutes)',
       type: 'number',
       options: {
-        list: [
-          {title: '30 minutes', value: 30},
-          {title: '45 minutes', value: 45},
-          {title: '60 minutes', value: 60},
-          {title: '90 minutes', value: 90},
-          {title: '120 minutes', value: 120},
-        ]
+     list: [
+  { title: '20 minutes', value: 20 },
+  { title: '40 minutes', value: 40 },
+  { title: '60 minutes', value: 60 },
+  { title: '80 minutes', value: 80 },
+  { title: '100 minutes', value: 100 },
+  { title: '120 minutes', value: 120 },
+]
       },
       validation: Rule => Rule.required()
     },
@@ -92,9 +93,9 @@ const availability = {
       options: {
         list: [
           {title: 'No buffer', value: 0},
-          {title: '15 minutes', value: 15},
-          {title: '30 minutes', value: 30},
-          {title: '45 minutes', value: 45},
+          {title: '20 minutes', value: 20},
+          {title: '40 minutes', value: 40},
+          {title: '60 minutes', value: 60},
         ]
       },
       validation: Rule => Rule.required()

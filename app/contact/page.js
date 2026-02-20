@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { globalStyles } from "@/styles/globalStyles";
 
 export default function ContactPage() {
@@ -121,26 +122,27 @@ export default function ContactPage() {
   return (
     <main className="bg-white min-h-screen">
       <style jsx global>{globalStyles}</style>
+
       {/* Compact Hero Section */}
       <section className="pt-20 pb-12 sm:pt-24 sm:pb-16 bg-warm-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center">
-  <div className="animate-slideDown" style={{ animationDelay: "0.1s" }}>
-    <div className="inline-block px-4 py-2 bg-brand text-white font-body text-xs sm:text-sm font-semibold rounded-full mb-6">
-      Let&#39;s Connect
-    </div>
-  </div>
-  <div className="animate-fadeInUp" style={{ animationDelay: "0.2s" }}>
-    <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-charcoal leading-tight mb-4">
-      Book a <span className="text-brand italic">consultation</span>
-    </h1>
-  </div>
-  <div className="animate-fadeInUp" style={{ animationDelay: "0.3s" }}>
-    <p className="font-body text-base sm:text-lg text-stone-600 leading-relaxed max-w-xl mx-auto">
-      Schedule a confidential consultation to discuss your needs and explore how we can support you.
-    </p>
-  </div>
-</div>
+            <div className="animate-slideDown" style={{ animationDelay: "0.1s" }}>
+              <div className="inline-block px-4 py-2 bg-brand text-white font-body text-xs sm:text-sm font-semibold rounded-full mb-6">
+                Let&#39;s Connect
+              </div>
+            </div>
+            <div className="animate-fadeInUp" style={{ animationDelay: "0.2s" }}>
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-charcoal leading-tight mb-4">
+                Book a <span className="text-brand italic">consultation</span>
+              </h1>
+            </div>
+            <div className="animate-fadeInUp" style={{ animationDelay: "0.3s" }}>
+              <p className="font-body text-base sm:text-lg text-stone-600 leading-relaxed max-w-xl mx-auto">
+                Schedule a confidential consultation to discuss your needs and explore how we can support you.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -149,8 +151,8 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             
-            {/* Left Column - Form */}
-            <div className="order-2 lg:order-1">
+            {/* Left Column - Form + What to Expect */}
+            <div className="order-2 lg:order-1 space-y-6">
               {success ? (
                 <div className="text-center py-12 bg-warm-white rounded-2xl">
                   <div className="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
@@ -264,11 +266,8 @@ export default function ContactPage() {
                   </form>
                 </div>
               )}
-            </div>
 
-            {/* Right Column - Info Cards */}
-            <div className="order-1 lg:order-2 space-y-6">
-              {/* What to Expect Card */}
+              {/* What to Expect Card — moved below booking form */}
               <div className="bg-brand-light rounded-2xl p-6 sm:p-8">
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center flex-shrink-0">
@@ -290,7 +289,7 @@ export default function ContactPage() {
                     <svg className="w-5 h-5 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <p className="font-body text-sm text-stone-700">60-minute initial consultation</p>
+                    <p className="font-body text-sm text-stone-700">20-minute initial consultation</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <svg className="w-5 h-5 text-brand mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -305,6 +304,22 @@ export default function ContactPage() {
                     <p className="font-body text-sm text-stone-700">Clear next steps and recommendations</p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Right Column - Client Photo, Email Card, Trust Stats */}
+            <div className="order-1 lg:order-2 space-y-6">
+
+              {/* Client Photo */}
+              <div className="relative h-[500px] md:h-[560px] rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/images/contactpic.jpg"
+                  alt="Inge Madden"
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: "center 15%" }}
+                  quality={100}
+                />
               </div>
 
               {/* Email Alternative Card */}
@@ -322,8 +337,6 @@ export default function ContactPage() {
                     <p className="font-body text-sm text-stone-600 mb-3">
                       We&#39;ll respond within 24 hours.
                     </p>
-              
-
                     <a
                       href="mailto:inge@maddentruenorthadvisory.com"
                       className="inline-flex items-center gap-2 font-body text-sm font-semibold text-brand hover:gap-3 transition-all group"
@@ -354,8 +367,8 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </section>

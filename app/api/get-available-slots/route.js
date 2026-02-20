@@ -124,7 +124,9 @@ export async function POST(request) {
       );
 
       const blockedBySanity = sanityBookings.some(b => b.bookingTime === timeStr);
-      const isPast = currentUTC <= now;
+     // Minimum 24 hours lead time required
+      const minimumNotice = new Date(now.getTime() + (24 * 60 * 60 * 1000));
+      const isPast = currentUTC <= minimumNotice;
 
       if (!blockedByGoogle && !blockedBySanity && !isPast) {
         slots.push({
