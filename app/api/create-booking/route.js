@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import { client } from '@/sanity/lib/client';
+import { subscribeToMailchimp } from '@/lib/mailchimp';
 
 export async function POST(request) {
   try {
@@ -13,7 +14,7 @@ export async function POST(request) {
       }
     `);
 
-    // 🆕 CHECK 1: Is this exact slot already booked?
+    // CHECK 1: Is this exact slot already booked?
     const existingSlotBooking = await client.fetch(`
       *[_type == "booking" && bookingDate == $date && bookingTime == $time && status == "confirmed"][0]
     `, { date, time });
@@ -24,7 +25,7 @@ export async function POST(request) {
       }, { status: 400 });
     }
 
-    // 🆕 CHECK 2: Does this email already have a booking on this date?
+    // CHECK 2: Does this email already have a booking on this date?
     const existingEmailBooking = await client.fetch(`
       *[_type == "booking" && clientEmail == $email && bookingDate == $date && status == "confirmed"][0]
     `, { email, date });
@@ -35,7 +36,7 @@ export async function POST(request) {
       }, { status: 400 });
     }
 
-    // 🆕 CHECK 3 (OPTIONAL): Limit one booking per email per week/month
+    // CHECK 3 (OPTIONAL): Limit one booking per email per week/month
     // Uncomment if you want stricter limits
     /*
     const oneWeekFromDate = new Date(date);
@@ -119,6 +120,13 @@ export async function POST(request) {
     });
 
     console.log('✅ Booking created in Sanity:', sanityBooking._id);
+
+    // ── Add to Mailchimp after successful booking ──
+    // We don't await or throw on failure — a Mailchimp hiccup should
+    // never block a confirmed booking from returning success to the user.
+    subscribeToMailchimp(name, email, ['Consultation Booking']).catch((err) => {
+      console.error('⚠️ Mailchimp sync failed (booking still confirmed):', err);
+    });
 
     return Response.json({ 
       success: true, 

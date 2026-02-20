@@ -43,29 +43,33 @@ export default function InsightsPage() {
   const [filteredInsights, setFilteredInsights] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch insights from Sanity
-useEffect(() => {
-  const fetchInsights = async () => {
-    try {
-      console.log('🔍 Fetching from API route...');
-      
-      const res = await fetch('/api/get-insights');
-      const { insights: data } = await res.json();
-      
-      console.log("✅ Raw data from API:", data);
-      console.log("📊 Number of documents:", data.length);
-      
-      setInsights(data);
-      setFilteredInsights(data);
-      setLoading(false);
-    } catch (error) {
-      console.error("❌ Error:", error);
-      setLoading(false);
-    }
-  };
+  // Newsletter state
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState("idle"); // idle | loading | success | error
 
-  fetchInsights();
-}, []);
+  // Fetch insights from Sanity
+  useEffect(() => {
+    const fetchInsights = async () => {
+      try {
+        console.log('🔍 Fetching from API route...');
+        
+        const res = await fetch('/api/get-insights');
+        const { insights: data } = await res.json();
+        
+        console.log("✅ Raw data from API:", data);
+        console.log("📊 Number of documents:", data.length);
+        
+        setInsights(data);
+        setFilteredInsights(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("❌ Error:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchInsights();
+  }, []);
 
   // Scroll reveal animation
   useEffect(() => {
@@ -109,6 +113,31 @@ useEffect(() => {
     console.log("Final filtered insights:", filtered.length);
     setFilteredInsights(filtered);
   }, [selectedCategory, selectedType, insights]);
+
+  // Newsletter submit handler
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setNewsletterStatus("loading");
+
+    try {
+      const res = await fetch("/api/subscribe-newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newsletterEmail }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setNewsletterStatus("success");
+        setNewsletterEmail("");
+      } else {
+        setNewsletterStatus("error");
+      }
+    } catch {
+      setNewsletterStatus("error");
+    }
+  };
 
   const featuredInsight = insights.find(i => i.isFeatured) || insights[0];
 
@@ -257,21 +286,46 @@ useEffect(() => {
                 Receive new articles and videos directly to your inbox. Thoughtful perspectives 
                 on leadership, strategy, and governance—without the noise.
               </p>
-              
-              <form className="flex flex-col sm:flex-row gap-3 max-w-xl">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 px-5 py-4 font-body bg-white border border-stone-300 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all"
-                />
-                <button
-                  type="submit"
-                  className="px-8 py-4 bg-brand text-white font-body font-semibold hover:bg-brand/90 transition-all whitespace-nowrap"
-                >
-                  Subscribe
-                </button>
-              </form>
-              
+
+              {/* ── Newsletter Form with Mailchimp integration ── */}
+              {newsletterStatus === "success" ? (
+                <div className="flex items-center gap-3 px-5 py-4 bg-white border border-brand/30 rounded-lg max-w-xl">
+                  <div className="w-8 h-8 bg-brand rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="font-body text-brand font-semibold">
+                    You&#39;re subscribed! You&#39;ll receive our latest insights directly to your inbox.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Your email address"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    className="flex-1 px-5 py-4 font-body bg-white border border-stone-300 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all"
+                  />
+                  <button
+                    type="submit"
+                    disabled={newsletterStatus === "loading"}
+                    className="px-8 py-4 bg-brand text-white font-body font-semibold hover:bg-brand/90 transition-all whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {newsletterStatus === "loading" ? "Subscribing..." : "Subscribe"}
+                  </button>
+                </form>
+              )}
+
+              {/* Error message */}
+              {newsletterStatus === "error" && (
+                <p className="font-body text-sm text-red-500 -mt-3">
+                  Something went wrong. Please try again or email us directly.
+                </p>
+              )}
+
               <p className="font-body text-sm text-stone-600">
                 Unsubscribe anytime. We respect your inbox.
               </p>
