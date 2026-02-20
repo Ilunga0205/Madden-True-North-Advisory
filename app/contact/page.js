@@ -313,7 +313,7 @@ export default function ContactPage() {
               {/* Client Photo */}
               <div className="relative h-[500px] md:h-[560px] rounded-2xl overflow-hidden shadow-lg">
                 <Image
-                  src="/images/contactpic.jpg"
+                  src="/images/bookingpage.jpg"
                   alt="Inge Madden"
                   fill
                   className="object-cover"
