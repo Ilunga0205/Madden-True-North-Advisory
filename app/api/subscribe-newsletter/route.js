@@ -1,6 +1,11 @@
 import { subscribeToMailchimp } from "@/lib/mailchimp";
 
 export async function POST(req) {
+    console.log('ENV CHECK:', {
+    hasApiKey: !!process.env.MAILCHIMP_API_KEY,
+    hasAudienceId: !!process.env.MAILCHIMP_AUDIENCE_ID,
+    hasDC: !!process.env.MAILCHIMP_DC,
+  });
   try {
     const { email } = await req.json();
 
