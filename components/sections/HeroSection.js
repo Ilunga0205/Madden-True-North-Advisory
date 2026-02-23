@@ -71,8 +71,7 @@ export default function HeroSection({ scrollY }) {
 
             <div className="animate-fadeInUp mb-8" style={{ animationDelay: "0.3s" }}>
               <p className="font-body text-sm sm:text-base md:text-lg text-stone-700 leading-relaxed">
-                Financial clarity and strategic guidance for business owners
-                navigating growth, change, and complexity.
+                 We help small businesses stay compliant, organized and confident in their numbers — whether you’re based in South Africa or working internationally.
               </p>
             </div>
 

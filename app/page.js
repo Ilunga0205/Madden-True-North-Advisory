@@ -8,9 +8,10 @@ import ValuePropositionSection from "@/components/sections/ValuePropositionSecti
 import ServicesSection from "@/components/sections/ServicesSection";
 import InsightsSection from "@/components/sections/InsightsSection";
 import CTASection from "@/components/sections/CTASection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 
 export default function HomePage() {
-  const scrollY = useScrollY(); // ← This is needed for parallax!
+  const scrollY = useScrollY();
   useScrollReveal();
 
   return (
@@ -21,6 +22,7 @@ export default function HomePage() {
       <ValuePropositionSection />
       <ServicesSection />
       <InsightsSection />
+      <TestimonialsSection />
       <CTASection />
     </main>
   );
