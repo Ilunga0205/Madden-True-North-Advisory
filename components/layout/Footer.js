@@ -7,6 +7,10 @@ import { useState, useEffect } from "react";
 export default function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
+  // Newsletter state
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState("idle"); // idle | loading | success | error
+
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
@@ -23,11 +27,100 @@ export default function Footer() {
     });
   };
 
+  // Newsletter submit handler
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setNewsletterStatus("loading");
+
+    try {
+      const res = await fetch("/api/subscribe-newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newsletterEmail }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setNewsletterStatus("success");
+        setNewsletterEmail("");
+      } else {
+        setNewsletterStatus("error");
+      }
+    } catch {
+      setNewsletterStatus("error");
+    }
+  };
+
   return (
     <>
       <footer className="bg-[#1F1F1F] text-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 lg:py-20">
-          
+
+          {/* Newsletter Section */}
+          <div className="py-10 mb-12 border-b border-stone-800">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs font-semibold uppercase tracking-wider text-[#8FA89A] mb-2">
+                  Stay informed
+                </p>
+                <h3 style={{ fontFamily: "'Playfair Display', serif" }} className="text-2xl md:text-3xl text-white leading-snug">
+                  Get new insights <span className="italic text-[#8FA89A]">delivered</span>
+                </h3>
+                <p style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-sm text-stone-400 mt-2 leading-relaxed max-w-sm">
+                  Thoughtful perspectives on leadership, strategy, and governance—without the noise.
+                </p>
+              </div>
+
+              <div>
+                {newsletterStatus === "success" ? (
+                  <div className="flex items-center gap-3 px-5 py-4 bg-[#8FA89A]/10 border border-[#8FA89A]/30 rounded-lg">
+                    <div className="w-8 h-8 bg-[#8FA89A] rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <p style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-[#8FA89A] font-semibold text-sm">
+                      You&#39;re subscribed! Insights coming your way.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="email"
+                      required
+                      placeholder="Your email address"
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      className="flex-1 px-4 py-3 text-sm bg-stone-800 border border-stone-700 text-white placeholder-stone-500 focus:border-[#8FA89A] focus:outline-none focus:ring-2 focus:ring-[#8FA89A]/20 transition-all"
+                    />
+                    <button
+                      type="submit"
+                      disabled={newsletterStatus === "loading"}
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      className="px-6 py-3 bg-[#8FA89A] text-white text-sm font-semibold hover:bg-[#7a9589] transition-all whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {newsletterStatus === "loading" ? "Subscribing..." : "Subscribe"}
+                    </button>
+                  </form>
+                )}
+
+                {newsletterStatus === "error" && (
+                  <p style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-red-400 mt-2">
+                    Something went wrong. Please try again or email us directly.
+                  </p>
+                )}
+
+                {newsletterStatus !== "success" && (
+                  <p style={{ fontFamily: "'Montserrat', sans-serif" }} className="text-xs text-stone-600 mt-2">
+                    Unsubscribe anytime. We respect your inbox.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
             
             {/* Brand Section */}
