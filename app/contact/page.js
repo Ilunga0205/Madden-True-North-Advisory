@@ -337,7 +337,7 @@ export default function ContactPage() {
               <div className="bg-[#F6F4F1] p-6 sm:p-8">
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <div className="font-display text-2xl sm:text-3xl text-[#8FA89A] mb-1">15+</div>
+                    <div className="font-display text-2xl sm:text-3xl text-[#8FA89A] mb-1">50+</div>
                     <div className="font-body text-xs text-stone-600">Years Experience</div>
                   </div>
                   <div>
