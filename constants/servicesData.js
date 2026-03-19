@@ -168,6 +168,68 @@ export const resilienceService = {
   imageAlt: 'Resilience and embodied support',
 };
 
+// ========== ACCOUNTING PACKAGES (NEW) ==========
+
+export const accountingPackages = [
+  {
+    id: "essentials",
+    badge: "Essentials",
+    tagline: "Compliance & Financial Organisation",
+    bestFor: "Solo or early-stage businesses who need their finances organised and compliant.",
+    features: [
+      "Monthly bookkeeping & reconciliations",
+      "SARS registrations & compliance checks",
+      "Provisional tax calculations",
+      "Annual financial statements",
+      "Annual tax return submission",
+      "Email support",
+    ],
+    result: "Your business finances are organised and compliant, without you having to manage the details.",
+    isPopular: false,
+  },
+  {
+    id: "growth",
+    badge: "Growth",
+    tagline: "Financial Visibility & Planning",
+    bestFor: "Small businesses that want to understand their numbers and improve financial decision-making.",
+    features: [
+      "Everything in Essentials, plus:",
+      "Monthly management reports",
+      "VAT submissions (if registered)",
+      "Cashflow tracking",
+      "Quarterly financial review meeting",
+    ],
+    result: "You gain clear visibility into how your business is performing and can plan ahead with confidence.",
+    isPopular: true,
+  },
+  {
+    id: "partner",
+    badge: "Partner",
+    tagline: "Financial Partner Support",
+    bestFor: "Business owners who want ongoing financial input and support making key decisions.",
+    features: [
+      "Everything in Growth, plus:",
+      "Monthly financial review meeting",
+      "Profitability discussions",
+      "Budget planning",
+      "Priority support",
+    ],
+    result: "You have an accountant who actively helps you make better financial decisions as your business grows.",
+    isPopular: false,
+  },
+];
+
+export const strategicAdvisory = {
+  badge: "Strategic Advisory",
+  tagline: "Optional — available once your accounting systems are stable.",
+  features: [
+    "Financial clarity sessions",
+    "Decision support",
+    "Business planning conversations",
+    "Financial strategy discussions",
+  ],
+};
+
 // Service Packages
 export const servicePackages = [
   {
@@ -184,5 +246,11 @@ export const servicePackages = [
     title: 'For Sustainable Leaders',
     description: 'Add resilience support to any package to build practices that keep you grounded and energized through challenges.',
     path: 'Any package + Resilience',
+  },
+
+  {
+    title: 'For Established Enterprises',
+    description: 'Integrate advanced financial strategies and resilience practices to support long-term sustainability and growth.',
+    path: 'Any package + Advanced Strategy',
   },
 ];

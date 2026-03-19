@@ -6,19 +6,30 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import CompactPageHeader from "@/components/sections/services/CompactPageHeader";
 import CTASection from "@/components/sections/CTASection";
 import SectionBadge from "@/components/ui/SectionBadge";
-import ServiceSnapshotCard from "@/components/ui/ServiceSnapshotCard";
 import ImageWithOverlay from "@/components/ui/ImageWithOverlay";
-import ServiceDetailCard from "@/components/ui/ServiceDetailCard";
-import ServiceCenteredCard from "@/components/ui/ServiceCenteredCard";
-import DarkServiceCard from "@/components/ui/DarkServiceCard";
-import ServicePackageCard from "@/components/ui/ServicePackageCard";
-import {
-  serviceSnapshots,
-  detailedServicesNew,
-  coachingService,
-  resilienceService,
-  servicePackages,
-} from "@/constants/servicesData";
+import Link from "next/link";
+import Image from "next/image";
+import { accountingPackages } from "@/constants/servicesData";
+import { CheckCircle2 } from "lucide-react";
+
+const allPackages = [
+  ...accountingPackages,
+  {
+    id: "strategic-advisory",
+    badge: "Strategic Advisory",
+    tagline: "Financial Partner Support",
+    bestFor: "Business owners who want ongoing financial input once their accounting systems are stable.",
+    features: [
+      "Financial clarity sessions",
+      "Decision support",
+      "Business planning conversations",
+      "Financial strategy discussions",
+    ],
+    result: "You have strategic financial input to help you make better decisions as your business grows.",
+    isPopular: false,
+    isAdvisory: true,
+  },
+];
 
 export default function ServicesPage() {
   useScrollReveal();
@@ -28,137 +39,173 @@ export default function ServicesPage() {
       <style jsx global>{globalStyles}</style>
 
       <main className="bg-white">
-        {/* Hero Section - Compact */}
+
+        {/* Hero Section */}
         <CompactPageHeader
           tag="Services"
           title={
             <>
-              Financial clarity meets <span className="text-[#8FA89A] italic">strategic support</span>
+              Accounting support <span className="text-[#8FA89A] italic">packages</span>
             </>
           }
-          description="From bookkeeping to CFO-level advisory and leadership coaching—comprehensive support for business owners who want both financial clarity and sustainable growth."
-          showImagePeek={true}
+          description="Practical accounting, tax and financial support for service-based business owners — locally and internationally."
+          showImagePeek={false}
         />
 
-        {/* Services Snapshot Section - Overlapping with image below */}
-        <section className="relative bg-[#F6F4F1] -mb-20 pb-24">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <div className="grid md:grid-cols-3 gap-6">
-              {serviceSnapshots.map((snapshot, index) => (
-                <ServiceSnapshotCard
-                  key={index}
-                  icon={snapshot.icon}
-                  title={snapshot.title}
-                  description={snapshot.description}
-                  delay={`${0.4 + index * 0.1}s`}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Image Section - Peek visible from above */}
+        {/* Image Section */}
         <ImageWithOverlay
           src="/images/servicepic.jpg"
-          alt="Financial services and coaching"
-          quote="Clear numbers. Strategic thinking. Sustainable growth."
-          addTopPadding={true}
+          alt="People working with accounting systems"
+          quote="Clear numbers. Compliant finances. Confident decisions."
         />
 
-        {/* Service 1 & 2: Accounting & Financial Strategy - Alternating Layout */}
-        {detailedServicesNew.map((service, index) => (
-          <section
-            key={service.id}
-            className={`py-20 scroll-reveal ${
-              index % 2 === 0 ? 'bg-white' : 'bg-[#F6F4F1]'
-            }`}
-          >
-            <div className="max-w-7xl mx-auto px-6 md:px-12">
-              <ServiceDetailCard
-                badge={service.badge}
-                title={service.title}
-                subtitle={service.subtitle}
-                features={service.features}
-                outcome={service.outcome}
-                imageSrc={service.imageSrc}
-                imageAlt={service.imageAlt}
-                imagePosition={service.imagePosition}
-                outcomeBackground={service.outcomeBackground}
-
-              />
-            </div>
-          </section>
-        ))}
-
-        {/* Service 3: Coaching & Decision Support - Centered Card */}
-        <section className="py-20 scroll-reveal bg-white">
-          <div className="max-w-5xl mx-auto px-6 md:px-12">
-            <ServiceCenteredCard
-              badge={coachingService.badge}
-              title={coachingService.title}
-              subtitle={coachingService.subtitle}
-              featuresColumns={coachingService.featuresColumns}
-              outcome={coachingService.outcome}
-            />
-          </div>
-        </section>
-
-        {/* Service 4: Resilience & Embodied Support - Dark Card */}
-        <section className="py-20 scroll-reveal bg-white">
+        {/* Packages Section */}
+        <section className="py-20 md:py-28 scroll-reveal bg-white">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <DarkServiceCard
-              badge={resilienceService.badge}
-              title={resilienceService.title}
-              subtitle={resilienceService.subtitle}
-              features={resilienceService.features}
-              outcome={resilienceService.outcome}
-              imageSrc={resilienceService.imageSrc}
-              imageAlt={resilienceService.imageAlt}
-            />
-          </div>
-        </section>
-
-        {/* How It Works Together Section */}
-        <section className="py-32 scroll-reveal bg-[#F6F4F1]">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <div className="mb-16 text-center max-w-3xl mx-auto">
-              <SectionBadge variant="brand">The complete picture</SectionBadge>
-              <h2 className="font-display text-4xl md:text-5xl text-[#1F1F1F] leading-tight">
-                Services that work <span className="text-[#8FA89A] italic">together</span>
+            <div className="mb-14 text-center max-w-2xl mx-auto">
+              <SectionBadge variant="light">Accounting Support Packages</SectionBadge>
+              <h2 className="font-display text-4xl md:text-5xl text-[#1F1F1F] leading-tight mt-4">
+                Choose the right <span className="text-[#8FA89A] italic">level of support</span>
               </h2>
-              <p className="font-body text-xl text-stone-700 leading-relaxed mt-6">
-                You don&#39;t have to choose just one. Most clients combine services to create the
-                support structure that fits their business and stage of growth.
+              <p className="font-body text-base md:text-lg text-stone-600 mt-4">
+                All work is performed using secure cloud accounting systems (Xero &amp; QuickBooks Online).
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {servicePackages.map((pkg, index) => (
-                <ServicePackageCard
-                  key={index}
-                  title={pkg.title}
-                  description={pkg.description}
-                  path={pkg.path}
-                />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {allPackages.map((pkg) => (
+                <div
+                  key={pkg.id}
+                  className={`relative flex flex-col bg-white border-2 p-6 transition-all hover:shadow-lg ${
+                    pkg.isPopular
+                      ? "border-[#8FA89A]"
+                      : pkg.isAdvisory
+                      ? "border-[#1F1F1F]"
+                      : "border-stone-200"
+                  }`}
+                >
+                  {/* Popular badge */}
+                  {pkg.isPopular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <span className="bg-[#8FA89A] text-white font-body text-xs font-semibold px-4 py-1.5 whitespace-nowrap">
+                        Recommended
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Advisory badge */}
+                  {pkg.isAdvisory && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <span className="bg-[#1F1F1F] text-white font-body text-xs font-semibold px-4 py-1.5 whitespace-nowrap">
+                        Optional Add-on
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Header */}
+                  <div className="mb-4">
+                    <span className="inline-block text-[#8FA89A] font-body text-xs font-semibold tracking-wider uppercase mb-2">
+                      {pkg.badge}
+                    </span>
+                    <h3 className="font-display text-xl md:text-2xl text-[#1F1F1F] mb-2 leading-tight">
+                      {pkg.tagline}
+                    </h3>
+                    <p className="font-body text-xs text-stone-500 leading-relaxed">
+                      <span className="font-semibold text-stone-700">Best for: </span>
+                      {pkg.bestFor}
+                    </p>
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-2 mb-6 flex-1">
+                    {pkg.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        {feature.startsWith("Everything") ? (
+                          <span className="font-body text-xs text-[#8FA89A] font-semibold">
+                            {feature}
+                          </span>
+                        ) : (
+                          <>
+                            <CheckCircle2
+                              size={15}
+                              className="text-[#8FA89A] flex-shrink-0 mt-0.5"
+                              strokeWidth={1.5}
+                            />
+                            <span className="font-body text-xs text-stone-700 leading-relaxed">{feature}</span>
+                          </>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Result */}
+                  <div className="bg-[#F6F4F1] border-l-4 border-[#8FA89A] p-3 mb-4">
+                    <p className="font-body text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1">
+                      Result
+                    </p>
+                    <p className="font-body text-xs text-stone-700 italic leading-relaxed">
+                      {pkg.result}
+                    </p>
+                  </div>
+
+                  {/* CTA */}
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-[#8FA89A] text-[#8FA89A] px-4 py-2.5 font-body font-semibold hover:bg-[#8FA89A] hover:text-white transition-all text-xs"
+                  >
+                    Get started
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>
         </section>
+
+        {/* Certification Badges */}
+<section className="py-12 scroll-reveal bg-[#F6F4F1]">
+  <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
+    <p className="font-body text-xs text-stone-500 uppercase tracking-wider font-semibold mb-8">
+      Certified on
+    </p>
+    <div className="flex items-center justify-center gap-6 flex-wrap">
+      <Image
+        src="/images/xero.png"
+        alt="Xero Advisor Certified"
+        width={160}
+        height={80}
+        className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+        style={{ height: '70px', width: 'auto' }}
+      />
+      <Image
+        src="/images/quickbook.png"
+        alt="QuickBooks Online Certified"
+        width={160}
+        height={80}
+        className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+        style={{ height: '70px', width: 'auto' }}
+      />
+    </div>
+  </div>
+</section>
 
         {/* CTA Section */}
         <CTASection
           tag="Let's talk"
           title={
             <>
-              Which services
+              Which package
               <br />
-              <span className="italic">fit your needs?</span>
+              <span className="italic">fits your needs?</span>
             </>
           }
-          description="Not sure where to start? Let's have a conversation about where you are and what support would be most valuable right now."
-          buttonText="Get in touch"
+          description="Not sure where to start? Book a free consultation and we'll help you find the right level of support."
+          buttonText="Book a free consultation"
           buttonLink="/contact"
         />
+
       </main>
     </PageWrapper>
   );

@@ -4,16 +4,16 @@ export default function ImageWithOverlay({
   src, 
   alt, 
   quote, 
-  height = "h-[500px] md:h-[650px]" 
 }) {
   return (
     <section className="scroll-reveal">
-      <div className={`relative ${height}`}>
+      <div className="relative w-full">
         <Image
           src={src}
           alt={alt}
-          fill
-          className="object-cover object-top"
+          width={1920}
+          height={1080}
+          className="w-full h-auto object-contain"
           quality={100}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1F1F1F]/40 to-transparent" />

@@ -9,7 +9,10 @@ import {
   Heart,
   Calculator,
   PieChart,
-  Circle 
+  Circle,
+  BookOpen,
+  ClipboardCheck,
+  Eye
 } from 'lucide-react';
 
 const iconMap = {
@@ -22,6 +25,9 @@ const iconMap = {
   Calculator,
   PieChart,
   Circle,
+  BookOpen,
+  ClipboardCheck,
+  Eye,
 };
 
 export default function ServiceCard({ title, description, icon }) {

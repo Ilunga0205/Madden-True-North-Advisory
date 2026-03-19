@@ -8,21 +8,18 @@ export default function ValuePropositionSection() {
         <div className="max-w-3xl mb-12 sm:mb-16 lg:mb-20">
           <SectionBadge>Who I help</SectionBadge>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1F1F1F] leading-tight mb-4 sm:mb-6">
-            Building businesses with <span className="text-[#8FA89A] italic">clarity and intention</span>
+            Built for founders, consultants, and <span className="text-[#8FA89A] italic">service-based businesses</span>
           </h2>
-          <p className="font-body text-base sm:text-lg lg:text-xl text-stone-700 leading-relaxed mb-6">
-            I help founders, consultants, and service-based business owners gain clarity in their finances, strengthen decision-making, and grow with intention.
-          </p>
-          <p className="font-body text-base sm:text-lg text-stone-600 leading-relaxed">
-            Most of my clients prioritize purpose and sustainability in how they build. Though many identify as women, my practice welcomes anyone committed to growing their business with thoughtfulness and care.
+          <p className="font-body text-base sm:text-lg lg:text-xl text-stone-700 leading-relaxed">
+            I work with founders, consultants, and service-based business owners who need reliable accounting, tax compliance, and financial oversight — whether you&#39;re operating locally or internationally.
           </p>
         </div>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {valuePropositions.map((item, index) => (
-            <div 
+            <div
               key={item.number}
-              className="scroll-reveal bg-white p-6 sm:p-8 lg:p-10 border-l-4 border-[#8FA89A]" 
+              className="scroll-reveal bg-white p-6 sm:p-8 lg:p-10 border-l-4 border-[#8FA89A]"
               style={{ transitionDelay: `${(index + 1) * 0.1}s` }}
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#8FA89A] flex items-center justify-center mb-4 sm:mb-6">

@@ -14,44 +14,44 @@ export const colors = {
 
 // Trust Indicators Data
 export const trustIndicators = [
-  {
-    value: '5+',
-    label: 'Years Experience',
-  },
-  {
-    value: '100+',
-    label: 'Organizations Served',
-  },
-  {
-    value: '5',
-    label: 'Continents',
-  },
+  { value: "15+", label: "Years Experience" },
+  { value: "35+", label: "Organisations Supported" },
+  { value: "50+", label: "Years Combined Experience" },
 ];
 
 // Services Data
 export const services = [
   {
-    id: "financial-clarity",
-    title: "Financial Clarity & Strategy",
-    description: "Accounting, bookkeeping, reporting, and forecasting to give you a clear view of where you stand and where you're headed.",
-    icon: "TrendingUp", // Changed from BarChart3 to match your other services
-    link: "/services/financial-clarity"
+    id: "bookkeeping",
+    title: "Bookkeeping & Monthly Accounting",
+    description: "Your books are behind or you're not sure where your money is going. We handle monthly bookkeeping, reconciliations and reporting so your finances stay accurate and up to date.",
+    icon: "BookOpen",
+    link: "/services"
   },
   {
-    id: "business-coaching",
-    title: "Business & Decision Coaching",
-    description: "Strategic thinking, leadership support, and clarity in direction to help you navigate complex decisions with confidence.",
-    icon: "Target", // Keep as Target to match
-    link: "/services/business-coaching"
+    id: "tax-compliance",
+    title: "Tax & Compliance",
+    description: "Tax deadlines cause stress and you're unsure what SARS requires. We manage your SARS registrations, provisional tax, VAT submissions and annual tax returns.",
+    icon: "ClipboardCheck",
+    link: "/services"
   },
   {
-    id: "resilience-wellbeing",
-    title: "Resilience & Well-being Support",
-    description: "Optional embodied and movement-based practices to support focus, energy, and sustainability in how you show up for your work.",
-    icon: "Sprout", // Changed from Heart to Sprout to match your services page
-    link: "/services/resilience-wellbeing"
+    id: "financial-statements",
+    title: "Financial Statements",
+    description: "You need accurate, professionally prepared annual financial statements. We prepare these on time and in the format your business requires.",
+    icon: "BarChart3",
+    link: "/services"
+  },
+  {
+    id: "financial-oversight",
+    title: "Ongoing Financial Oversight",
+    description: "You want someone responsible watching the finances. We provide monthly management reports, cashflow tracking and quarterly review meetings.",
+    icon: "Eye",
+    link: "/services"
   },
 ];
+
+
 // Insights Data
 export const insights = [
   {
@@ -80,22 +80,22 @@ export const insights = [
   },
 ];
 
-// Value Propositions
+//value propositions data
+
 export const valuePropositions = [
- {
+  {
     number: "01",
     title: "Solo Founders & Consultants",
-    description: "Supporting independent professionals who need financial clarity and strategic guidance as they build and scale their expertise."
+    description: "Independent professionals who need their books accurate, their tax obligations met, and their finances organised — without managing it themselves."
   },
   {
     number: "02",
     title: "Service-Based Businesses",
-    description: "Helping digital and service businesses strengthen their financial foundations and make confident decisions for sustainable growth."
+    description: "Small businesses that have outgrown spreadsheets and need reliable monthly accounting, VAT, and financial reporting to stay compliant and informed."
   },
   {
     number: "03",
-    title: "Growth & Transition",
-    description: "Guiding business owners through pivotal moments—whether navigating expansion, restructuring, or building with renewed intention."
+    title: "Local & International Clients",
+    description: "Business owners based in South Africa or working internationally, supported through secure cloud accounting systems — Xero and QuickBooks Online."
   }
-
 ];

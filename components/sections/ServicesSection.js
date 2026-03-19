@@ -11,12 +11,15 @@ export default function ServicesSection() {
           <div className="max-w-2xl">
             <SectionBadge variant="brand">Services</SectionBadge>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1F1F1F] leading-tight">
-              Strategic support at every level
+              How we help
             </h2>
+            <p className="font-body text-sm sm:text-base text-stone-500 leading-relaxed mt-4">
+              All work is performed using secure cloud accounting systems (Xero &amp; QuickBooks Online).
+            </p>
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {services.map((service) => (
             <ServiceCard
               key={service.id}
@@ -28,7 +31,7 @@ export default function ServicesSection() {
         </div>
 
         <div className="flex justify-center mt-10 sm:mt-12">
-          <Link 
+          <Link
             href="/services"
             className="group inline-flex items-center gap-2 bg-[#8FA89A] text-white px-6 sm:px-8 py-3 sm:py-4 font-body font-semibold hover:bg-[#7a9284] transition-all duration-300"
           >

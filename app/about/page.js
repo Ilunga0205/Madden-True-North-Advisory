@@ -1,23 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { globalStyles } from "@/styles/globalStyles";
 import ImageWithOverlay from "@/components/ui/ImageWithOverlay";
+import CTASection from "@/components/sections/CTASection";
 
 export default function AboutPage() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,292 +31,205 @@ export default function AboutPage() {
     <main className="bg-white">
       <style jsx global>{globalStyles}</style>
 
-      {/* Hero Section - Compact */}
-      <section className="relative bg-warm-white overflow-hidden py-16 md:py-20">
+      {/* Hero Section */}
+      <section className="relative bg-[#F6F4F1] overflow-hidden py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           <div className="animate-slideDown mb-4" style={{ animationDelay: "0.1s" }}>
-            <span className="inline-block text-brand font-body text-sm font-semibold tracking-wider uppercase">
+            <span className="inline-block text-[#8FA89A] font-body text-sm font-semibold tracking-wider uppercase">
               About Inge Madden
             </span>
           </div>
-
           <div className="animate-fadeInUp mb-6" style={{ animationDelay: "0.2s" }}>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.1]">
-              Financial clarity meets <span className="text-brand italic">human insight</span>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[#1F1F1F] leading-[1.1]">
+              Professional accountant. <span className="text-[#8FA89A] italic">Practical support.</span>
             </h1>
           </div>
-
-          <div className="animate-fadeInUp mb-0" style={{ animationDelay: "0.3s" }}>
+          <div className="animate-fadeInUp" style={{ animationDelay: "0.3s" }}>
             <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed max-w-3xl mx-auto">
-              I&#39;m Inge Madden, founder of Madden True North Advisory. I help business owners gain clarity, 
-              plan for sustainable growth, and lead with confidence.
+              I am a professional accountant supporting service-based business owners with ongoing
+              bookkeeping, tax compliance and financial oversight. My work focuses on helping businesses
+              stay organised and meet their obligations while also understanding their numbers.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Scroll Teaser Section */}
-      <section className="relative bg-warm-white pt-4 pb-6">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid md:grid-cols-3 gap-6 mb-4">
-            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
-              <div className="text-brand font-display text-4xl mb-2">01</div>
-              <h3 className="font-display text-xl text-charcoal mb-2">Financial Expertise</h3>
-              <p className="font-body text-sm text-stone-600">Accounting & strategic finance background</p>
-            </div>
-            
-            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.5s" }}>
-              <div className="text-brand font-display text-4xl mb-2">02</div>
-              <h3 className="font-display text-xl text-charcoal mb-2">Coaching</h3>
-              <p className="font-body text-sm text-stone-600">Supporting your leadership journey</p>
-            </div>
-            
-            <div className="bg-white p-6 border-l-4 border-brand shadow-sm hover:shadow-md transition-shadow animate-fadeInUp" style={{ animationDelay: "0.6s" }}>
-              <div className="text-brand font-display text-4xl mb-2">03</div>
-              <h3 className="font-display text-xl text-charcoal mb-2">Resilience</h3>
-              <p className="font-body text-sm text-stone-600">Practical strategies for sustainable growth</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Image Section — now uses shared component */}
+      {/* Image Section */}
       <ImageWithOverlay
-        src="/images/aboutpic1.jpg"
+        src="/images/about.jpg"
         alt="Inge Madden - True North Advisory"
-        quote="True growth is about understanding priorities and making deliberate choices"
+        quote="Keeping your finances accurate, compliant and understandable"
       />
 
-      {/* Philosophy Section */}
+      {/* Professional Background + International Clients */}
       <section className="py-32 scroll-reveal bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-5 gap-16 items-start">
+
             <div className="md:col-span-2">
-              <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-6">
-                My journey
+              <div className="inline-block px-4 py-2 bg-[#F6F4F1] text-[#8FA89A] font-body text-sm font-semibold rounded-full mb-6">
+                About Inge
               </div>
-              <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight sticky top-24">
-                From numbers to <span className="text-brand italic">holistic growth</span>
+              <h2 className="font-display text-4xl md:text-5xl text-[#1F1F1F] leading-tight sticky top-24">
+                Experience you can <span className="text-[#8FA89A] italic">rely on</span>
               </h2>
             </div>
 
-            <div className="md:col-span-3 space-y-8">
-              <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                I began my career in accounting and finance, working with international clients 
-                and seeing firsthand how clarity in numbers drives confident decision-making.
-              </p>
-              <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                Over time, I realized that true growth isn&#39;t just about financials — it&#39;s about 
-                understanding priorities, making deliberate choices, and staying grounded through change.
-              </p>
-              <p className="font-body text-lg md:text-xl text-stone-700 leading-relaxed">
-                That&#39;s why I combine financial expertise with coaching and practical resilience 
-                strategies, helping business owners gain clarity, plan for sustainable growth, 
-                and lead with confidence.
-              </p>
-              
-              <div className="mt-12 p-8 bg-warm-white border-l-4 border-brand">
-                <p className="font-body text-lg text-stone-700 leading-relaxed italic">
-                  &quot;My work supports both the strategic and human sides of business, offering 
-                  a clear, structured, and balanced path forward.&quot;
+            <div className="md:col-span-3 space-y-10">
+
+              {/* Professional Background */}
+              <div>
+                <h3 className="font-display text-2xl text-[#1F1F1F] mb-4">
+                  Professional Background
+                </h3>
+                <ul className="space-y-3">
+                  {[
+                    "Over 15 years experience in accounting and financial management",
+                    "Experience with small businesses and professionals across multiple industries",
+                    "Cloud accounting systems: Xero & QuickBooks Online",
+                    "Clients supported locally and internationally",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#8FA89A] flex-shrink-0 mt-2.5" />
+                      <span className="font-body text-base md:text-lg text-stone-700 leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* International Clients */}
+              <div>
+                <h3 className="font-display text-2xl text-[#1F1F1F] mb-4">
+                  Working With International Clients
+                </h3>
+                <p className="font-body text-base md:text-lg text-stone-700 leading-relaxed mb-4">
+                  I work with international clients using secure cloud accounting systems. Documents are
+                  shared through protected folders and bookkeeping is completed on Xero or QuickBooks Online.
+                  Communication is handled through scheduled check-ins and email support.
+                </p>
+                <p className="font-body text-base md:text-lg text-stone-700 leading-relaxed">
+                  This allows business owners outside South Africa to have consistent and reliable
+                  accounting support.
                 </p>
               </div>
+
+              {/* Quote */}
+              <div className="p-8 bg-[#F6F4F1] border-l-4 border-[#8FA89A]">
+                <p className="font-body text-lg text-stone-700 leading-relaxed italic">
+                  &quot;True North Advisory was created to give business owners ongoing financial
+                  support — not just once-a-year tax preparation.&quot;
+                </p>
+              </div>
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* Principles Section */}
-      <section className="py-32 scroll-reveal bg-warm-white">
+
+      {/* Principles Section — restored exactly */}
+      <section className="py-32 scroll-reveal bg-[#F6F4F1]">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="max-w-3xl mb-16">
-            <div className="inline-block px-4 py-2 bg-brand text-white font-body text-sm font-semibold rounded-full mb-6">
+            <div className="inline-block px-4 py-2 bg-[#8FA89A] text-white font-body text-sm font-semibold rounded-full mb-6">
               My approach
             </div>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl text-[#1F1F1F] leading-tight">
               Three pillars of sustainable growth
             </h2>
           </div>
 
           <div className="space-y-6">
-            <PrincipleCard
-              number="01"
-              title="Financial Expertise"
-              description="Deep experience in accounting and finance, working with international clients to turn numbers into actionable insights and confident decisions."
-            />
-            <PrincipleCard
-              number="02"
-              title="Coaching & Strategy"
-              description="Helping you understand your priorities, make deliberate choices, and stay aligned with your vision as you grow."
-            />
-            <PrincipleCard
-              number="03"
-              title="Practical Resilience"
-              description="Building sustainable systems and mindsets that help you stay grounded through change and navigate challenges with confidence."
-            />
+            {[
+              {
+                number: "01",
+                title: "Financial Expertise",
+                description: "Deep experience in accounting and finance, working with international clients to turn numbers into actionable insights and confident decisions.",
+              },
+              {
+                number: "02",
+                title: "Coaching & Strategy",
+                description: "Helping you understand your priorities, make deliberate choices, and stay aligned with your vision as you grow.",
+              },
+              {
+                number: "03",
+                title: "Practical Resilience",
+                description: "Building sustainable systems and mindsets that help you stay grounded through change and navigate challenges with confidence.",
+              },
+            ].map((item) => (
+              <div
+                key={item.number}
+                className="scroll-reveal bg-white p-8 md:p-10 border-l-4 border-[#8FA89A] group hover:shadow-lg transition-all"
+              >
+                <div className="flex items-start gap-8">
+                  <div className="font-display text-6xl md:text-7xl text-stone-200 flex-shrink-0">
+                    {item.number}
+                  </div>
+                  <div className="flex-1 pt-2">
+                    <h3 className="font-display text-2xl md:text-3xl mb-3 text-[#1F1F1F]">
+                      {item.title}
+                    </h3>
+                    <p className="font-body text-lg text-stone-700 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-
-      {/* Approach Section */}
+      {/* Approach Section — exact old styling */}
       <section className="py-32 scroll-reveal bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="mb-20 text-center max-w-3xl mx-auto">
-            <div className="inline-block px-4 py-2 bg-warm-white text-brand font-body text-sm font-semibold rounded-full mb-6">
+            <div className="inline-block px-4 py-2 bg-[#F6F4F1] text-[#8FA89A] font-body text-sm font-semibold rounded-full mb-6">
               Working together
             </div>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight mb-6">
-              What you can <span className="text-brand italic">expect</span>
+            <h2 className="font-display text-4xl md:text-5xl text-[#1F1F1F] leading-tight mb-6">
+              What you can <span className="text-[#8FA89A] italic">expect</span>
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <div className="scroll-reveal" style={{ transitionDelay: "0.1s" }}>
-              <ApproachItem
-                title="Clear financial foundation"
-                description="Your books are accurate, your reports are meaningful, and you understand exactly where your business stands."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.2s" }}>
-              <ApproachItem
-                title="Strategic clarity"
-                description="You have a clear plan for growth, informed by both numbers and your deeper business priorities."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.3s" }}>
-              <ApproachItem
-                title="Confident decision-making"
-                description="You feel equipped to make important decisions, knowing you have both the data and the support you need."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.4s" }}>
-              <ApproachItem
-                title="Sustainable systems"
-                description="You've built resilient practices and mindsets that support long-term success, not just short-term wins."
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-32 scroll-reveal bg-warm-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="mb-20">
-            <div className="inline-block px-4 py-2 bg-brand text-white font-body text-sm font-semibold rounded-full mb-6">
-              Core values
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight max-w-4xl">
-              What guides my work
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="scroll-reveal" style={{ transitionDelay: "0.1s" }}>
-              <ValueCard
-                title="Clarity over complexity"
-                description="Numbers should inform, not overwhelm. I help you see what matters and make sense of your financial story."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.2s" }}>
-              <ValueCard
-                title="Growth with balance"
-                description="Sustainable success comes from honoring both the strategic and human sides of business. It's not one or the other."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.3s" }}>
-              <ValueCard
-                title="Deliberate decision-making"
-                description="Every choice shapes your business. I support you in making decisions that align with your priorities and values."
-              />
-            </div>
-            <div className="scroll-reveal" style={{ transitionDelay: "0.4s" }}>
-              <ValueCard
-                title="Grounded resilience"
-                description="Change is constant. I help you build the systems and mindsets that keep you steady through growth and challenges."
-              />
-            </div>
+            {[
+              {
+                title: "Clear financial foundation",
+                description: "Your books are accurate, your reports are meaningful, and you understand exactly where your business stands.",
+              },
+              {
+                title: "Strategic clarity",
+                description: "You have a clear plan for growth, informed by both numbers and your deeper business priorities.",
+              },
+              {
+                title: "Confident decision-making",
+                description: "You feel equipped to make important decisions, knowing you have both the data and the support you need.",
+              },
+              {
+                title: "Sustainable systems",
+                description: "You've built resilient practices and mindsets that support long-term success, not just short-term wins.",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="scroll-reveal group bg-[#F6F4F1] p-8 h-full border-l-4 border-transparent hover:shadow-md transition-all"
+                style={{ transitionDelay: `${(index + 1) * 0.1}s` }}
+              >
+                <h3 className="font-display text-2xl md:text-3xl mb-4 text-[#1F1F1F] transition-colors">
+                  {item.title}
+                </h3>
+                <p className="font-body text-lg text-stone-700 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-40 scroll-reveal overflow-hidden bg-brand">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl" />
-        </div>
+      <CTASection />
 
-        <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-center">
-          <div className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm text-white/90 font-body text-sm font-medium rounded-full mb-8">
-            Let&#39;s connect
-          </div>
-          
-          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight">
-            Ready to find
-            <br />
-            <span className="italic">your clarity?</span>
-          </h2>
-          
-          <p className="font-body text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto">
-            Let&#39;s talk about where you are, where you want to go, and how I can support your journey.
-          </p>
-          
-          <Link
-            href="/contact"
-            className="group inline-flex items-center justify-center px-10 py-5 bg-white text-brand font-body font-semibold hover:bg-white/90 transition-all hover:shadow-2xl hover:shadow-white/20"
-          >
-            <span>Start a conversation</span>
-            <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
-      </section>
     </main>
-  );
-}
-
-/* ---------- Components ---------- */
-
-function PrincipleCard({ number, title, description }) {
-  return (
-    <div className="scroll-reveal bg-white p-8 md:p-10 border-l-4 border-brand group hover:bg-white hover:shadow-lg transition-all">
-      <div className="flex items-start gap-8">
-        <div className="font-display text-6xl md:text-7xl text-stone-200 group-hover:text-brand/30 transition-colors flex-shrink-0">
-          {number}
-        </div>
-        <div className="flex-1 pt-2">
-          <h3 className="font-display text-2xl md:text-3xl mb-3 text-charcoal group-hover:text-brand transition-colors">{title}</h3>
-          <p className="font-body text-lg text-stone-700 leading-relaxed">{description}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ApproachItem({ title, description }) {
-  return (
-    <div className="group bg-warm-white p-8 h-full border-l-4 border-transparent hover:border-brand transition-all">
-      <h3 className="font-display text-2xl md:text-3xl mb-4 text-charcoal group-hover:text-brand transition-colors">
-        {title}
-      </h3>
-      <p className="font-body text-lg text-stone-700 leading-relaxed">
-        {description}
-      </p>
-    </div>
-  );
-}
-
-function ValueCard({ title, description }) {
-  return (
-    <div className="group bg-white p-8 border border-stone-200 hover:border-brand hover:shadow-lg transition-all h-full">
-      <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-4 group-hover:text-brand transition-colors">
-        {title}
-      </h3>
-      <p className="font-body text-lg text-stone-700 leading-relaxed">
-        {description}
-      </p>
-    </div>
   );
 }

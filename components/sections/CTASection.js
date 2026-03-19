@@ -3,7 +3,7 @@ import SectionBadge from "@/components/ui/SectionBadge";
 
 export default function CTASection() {
   return (
-    <section className="relative py-20 sm:py-32 lg:py-40 scroll-reveal overflow-hidden bg-[#8FA89A]">
+    <section className="relative py-12 sm:py-16 lg:py-20 scroll-reveal overflow-hidden bg-[#8FA89A]">
       <div className="absolute inset-0">
         <div className="absolute top-0 right-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-white/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-white/5 rounded-full blur-3xl" />

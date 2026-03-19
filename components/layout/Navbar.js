@@ -13,30 +13,46 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
           
           {/* Logo */}
-          <Link href="/" className="relative h-14 w-64 hover:opacity-80 transition-opacity">
-            <Image
-              src="/images/logoblack.png"
-              alt="Madden True North Advisory"
-              fill
-              className="object-contain object-left"
-              priority
-            />
-          </Link>
+   <Link
+  href="/"
+  onClick={(e) => {
+    if (window.location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }}
+  className="relative h-14 w-64 hover:opacity-80 transition-all duration-300 hover:scale-[1.03] active:scale-95"
+>
+  <Image
+    src="/images/logoblack.png"
+    alt="Madden True North Advisory"
+    fill
+    className="object-contain object-left"
+    priority
+  />
+</Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            <Link href="/about" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
-              About
+            <Link href="/" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
+              Home
             </Link>
             <Link href="/services" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
               Services
             </Link>
-            <Link href="/packages" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
+            <Link href="/about" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
+              About
+            </Link>
+            <Link href="/contact" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
+              Contact
+            </Link>
+            {/* Removed as per client action items — both docs confirm removal */}
+            {/* <Link href="/packages" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
               Packages
-            </Link>
-            <Link href="/insights" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
+            </Link> */}
+            {/* <Link href="/insights" className="font-['Montserrat'] text-sm font-medium text-stone-600 hover:text-[#8FA89A] transition-colors">
               Insights
-            </Link>
+            </Link> */}
           </nav>
 
           {/* Desktop Button */}
@@ -72,18 +88,25 @@ export default function Navbar() {
         {open && (
           <div className="lg:hidden border-t border-stone-200 bg-[#F6F4F1]">
             <nav className="px-6 py-6 flex flex-col gap-4">
-              <Link href="/about" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
-                About
+              <Link href="/" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
+                Home
               </Link>
               <Link href="/services" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
                 Services
               </Link>
-              <Link href="/packages" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
+              <Link href="/about" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
+                About
+              </Link>
+              <Link href="/contact" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
+                Contact
+              </Link>
+              {/* Removed as per client action items — both docs confirm removal */}
+              {/* <Link href="/packages" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
                 Packages
-              </Link>
-              <Link href="/insights" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
+              </Link> */}
+              {/* <Link href="/insights" onClick={() => setOpen(false)} className="font-['Montserrat'] text-base font-medium text-[#1F1F1F] hover:text-[#8FA89A] transition-colors py-2">
                 Insights
-              </Link>
+              </Link> */}
               <Link 
                 href="/contact"
                 onClick={() => setOpen(false)}
