@@ -11,14 +11,14 @@ export default function HeroSection({ scrollY }) {
       <div className="grid lg:grid-cols-2 min-h-screen max-w-none">
 
         {/* ── Left Column — Content ── */}
-        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 xl:px-24 py-16 lg:py-20 order-1">
+        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 xl:px-24 py-16 lg:py-20 pb-24 lg:pb-28 order-1">
           <div className="max-w-xl mx-auto lg:mx-0 lg:ml-auto">
 
             {/* Headline */}
             <div className="animate-fadeInUp mb-8" style={{ animationDelay: "0.1s" }}>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1F1F1F] leading-[1.1]">
-  <span className="text-[#8FA89A]">Clarity</span>, direction, and sustainable growth.
-</h1>
+                <span className="text-[#8FA89A]">Clarity</span>, direction, and sustainable growth.
+              </h1>
             </div>
 
             {/* Buttons */}
@@ -62,22 +62,55 @@ export default function HeroSection({ scrollY }) {
               </div>
             </div>
 
-            {/* Info card — below trust indicators */}
+            {/* Info card + Certification logos — unified block */}
             <div className="animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
-              <div className="bg-white shadow-lg border border-stone-100 p-4 sm:p-5 flex items-start gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#8FA89A] flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <div className="font-body font-semibold text-[#1F1F1F] mb-1 text-sm sm:text-base">
-                    Certified Public Accountant
+              <div className="bg-white shadow-lg border border-stone-100">
+
+                {/* Top row — CPA */}
+                <div className="p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#8FA89A] flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
                   </div>
-                  <div className="font-body text-xs sm:text-sm text-stone-700">
-                    Clear and independent guidance you can rely on
+                  <div>
+                    <div className="font-body font-semibold text-[#1F1F1F] mb-1 text-sm sm:text-base">
+                      Certified Public Accountant
+                    </div>
+                    <div className="font-body text-xs sm:text-sm text-stone-500">
+                      Clear and independent guidance you can rely on
+                    </div>
                   </div>
                 </div>
+
+                {/* Divider + logos row */}
+                <div className="border-t border-stone-100 bg-stone-50 px-4 sm:px-5 py-3">
+                  <p className="font-body text-[10px] font-semibold text-stone-400 uppercase tracking-wider mb-3">
+                    Certified on
+                  </p>
+                  <div className="flex items-center gap-0">
+
+                    {/* Xero logo cell */}
+                    <div className="flex-1 flex items-center justify-center py-2 pr-3 border-r border-stone-200">
+                      <img
+                        src="/images/xero.png"
+                        alt="Xero Advisor Certified"
+                        className="h-10 w-auto max-w-[120px] object-contain"
+                      />
+                    </div>
+
+                    {/* QuickBooks logo cell */}
+                    <div className="flex-1 flex items-center justify-center py-2 pl-3">
+                      <img
+                        src="/images/quickbook.png"
+                        alt="QuickBooks Online Certified"
+                        className="h-10 w-auto max-w-[120px] object-contain"
+                      />
+                    </div>
+
+                  </div>
+                </div>
+
               </div>
             </div>
 

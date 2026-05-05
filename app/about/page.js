@@ -58,8 +58,7 @@ export default function AboutPage() {
       <ImageWithOverlay
         src="/images/about.jpg"
         alt="Inge Madden - True North Advisory"
-        quote="Keeping your finances accurate, compliant and understandable"
-      />
+quote="I'm Inge Madden, a Certified Public Accountant, with over 15 years of experience working with small businesses and professionals. True North Advisory was created to give business owners ongoing financial support — not just once-a-year tax preparation. My role is simple: keep your finances accurate, compliant and understandable so you can focus on running your business."      />
 
       {/* Professional Background + International Clients */}
       <section className="py-32 scroll-reveal bg-white">

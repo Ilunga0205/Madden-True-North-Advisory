@@ -147,24 +147,23 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
-            {/* Left Column — When to book + Form + Info boxes */}
+            {/* Left Column — First call info + Form + What you will get */}
             <div className="order-2 lg:order-1 space-y-6">
 
-              {/* When to book a call */}
+              {/* What happens on the first call */}
               <div className="bg-[#F6F4F1] border-l-4 border-[#8FA89A] p-6 sm:p-8">
-                <h2 className="font-display text-2xl text-[#1F1F1F] mb-4">
-                  When to book a call
+                <h2 className="font-display text-2xl text-[#1F1F1F] mb-2">
+                  What happens on the first call
                 </h2>
                 <p className="font-body text-sm text-stone-600 mb-4">
-                  Book a consultation if:
+                  During the 20-minute New Client Assessment:
                 </p>
                 <div className="space-y-3">
                   {[
-                    "You need an accountant",
-                    "Your bookkeeping is behind",
-                    "You're unsure about tax requirements",
-                    "You're starting a business",
-                    "You want ongoing financial support",
+                    "We review your current setup",
+                    "Identify any urgent issues",
+                    "Answer your questions",
+                    "Determine whether ongoing accounting support is needed",
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3">
                       {checkIcon}
@@ -172,6 +171,9 @@ export default function ContactPage() {
                     </div>
                   ))}
                 </div>
+                <p className="font-body text-sm text-stone-600 mt-5 italic">
+                  After the call you will know your next steps.
+                </p>
               </div>
 
               {/* Booking Form */}

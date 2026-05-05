@@ -12,24 +12,15 @@ import Image from "next/image";
 import { accountingPackages } from "@/constants/servicesData";
 import { CheckCircle2 } from "lucide-react";
 
-const allPackages = [
-  ...accountingPackages,
-  {
-    id: "strategic-advisory",
-    badge: "Strategic Advisory",
-    tagline: "Financial Partner Support",
-    bestFor: "Business owners who want ongoing financial input once their accounting systems are stable.",
-    features: [
-      "Financial clarity sessions",
-      "Decision support",
-      "Business planning conversations",
-      "Financial strategy discussions",
-    ],
-    result: "You have strategic financial input to help you make better decisions as your business grows.",
-    isPopular: false,
-    isAdvisory: true,
-  },
-];
+const strategicAdvisory = {
+  features: [
+    "Financial clarity sessions",
+    "Decision support",
+    "Business planning conversations",
+    "Financial strategy discussions",
+  ],
+  result: "You have strategic financial input to help you make better decisions as your business grows.",
+};
 
 export default function ServicesPage() {
   useScrollReveal();
@@ -59,7 +50,7 @@ export default function ServicesPage() {
           quote="Clear numbers. Compliant finances. Confident decisions."
         />
 
-        {/* Packages Section */}
+        {/* ── 3 Main Packages ── */}
         <section className="py-20 md:py-28 scroll-reveal bg-white">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <div className="mb-14 text-center max-w-2xl mx-auto">
@@ -72,16 +63,13 @@ export default function ServicesPage() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {allPackages.map((pkg) => (
+            {/* 3-column grid — same card structure as before, just 3 cols */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {accountingPackages.map((pkg) => (
                 <div
                   key={pkg.id}
                   className={`relative flex flex-col bg-white border-2 p-6 transition-all hover:shadow-lg ${
-                    pkg.isPopular
-                      ? "border-[#8FA89A]"
-                      : pkg.isAdvisory
-                      ? "border-[#1F1F1F]"
-                      : "border-stone-200"
+                    pkg.isPopular ? "border-[#8FA89A]" : "border-stone-200"
                   }`}
                 >
                   {/* Popular badge */}
@@ -89,15 +77,6 @@ export default function ServicesPage() {
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                       <span className="bg-[#8FA89A] text-white font-body text-xs font-semibold px-4 py-1.5 whitespace-nowrap">
                         Recommended
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Advisory badge */}
-                  {pkg.isAdvisory && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="bg-[#1F1F1F] text-white font-body text-xs font-semibold px-4 py-1.5 whitespace-nowrap">
-                        Optional Add-on
                       </span>
                     </div>
                   )}
@@ -164,32 +143,95 @@ export default function ServicesPage() {
           </div>
         </section>
 
+        {/* ── Strategic Advisory — standalone dark section ── */}
+        <section className="py-20 md:py-28 scroll-reveal bg-[#1F1F1F]">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+
+              {/* Left — text */}
+              <div>
+                <span className="inline-block text-[#8FA89A] font-body text-xs font-semibold tracking-wider uppercase mb-4">
+                  Optional Add-on
+                </span>
+                <h2 className="font-display text-4xl md:text-5xl text-white leading-tight mb-6">
+                  Strategic <span className="text-[#8FA89A] italic">Advisory</span>
+                </h2>
+                <p className="font-body text-base md:text-lg text-stone-400 leading-relaxed mb-4">
+                  Available once your accounting systems are stable. A focused session to review your
+                  business finances, identify risks, and determine the right financial structure for
+                  your business.
+                </p>
+                <p className="font-body text-sm text-stone-500 leading-relaxed mb-8">
+                  This is not part of a monthly package — it is available as a standalone session when
+                  you need deeper financial input or strategic clarity.
+                </p>
+
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-[#8FA89A] text-white px-6 py-3.5 font-body font-semibold hover:bg-[#7a9488] transition-all text-sm"
+                >
+                  Book your session
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+
+              {/* Right — numbered feature list */}
+              <div className="space-y-4">
+                <p className="font-body text-xs font-semibold text-stone-500 uppercase tracking-wider mb-6">
+                  Includes
+                </p>
+                {strategicAdvisory.features.map((feature, i) => (
+                  <div key={i} className="flex items-start gap-4 border-b border-stone-800 pb-4">
+                    <span className="font-display text-2xl text-stone-700 flex-shrink-0 leading-none mt-1">
+                      0{i + 1}
+                    </span>
+                    <span className="font-body text-base text-stone-300 leading-relaxed">{feature}</span>
+                  </div>
+                ))}
+
+                {/* Result */}
+                <div className="mt-6 p-6 border-l-4 border-[#8FA89A] bg-stone-900">
+                  <p className="font-body text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">
+                    Result
+                  </p>
+                  <p className="font-body text-sm text-stone-300 italic leading-relaxed">
+                    {strategicAdvisory.result}
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
         {/* Certification Badges */}
-<section className="py-12 scroll-reveal bg-[#F6F4F1]">
-  <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-    <p className="font-body text-xs text-stone-500 uppercase tracking-wider font-semibold mb-8">
-      Certified on
-    </p>
-    <div className="flex items-center justify-center gap-6 flex-wrap">
-      <Image
-        src="/images/xero.png"
-        alt="Xero Advisor Certified"
-        width={160}
-        height={80}
-        className="object-contain opacity-80 hover:opacity-100 transition-opacity"
-        style={{ height: '70px', width: 'auto' }}
-      />
-      <Image
-        src="/images/quickbook.png"
-        alt="QuickBooks Online Certified"
-        width={160}
-        height={80}
-        className="object-contain opacity-80 hover:opacity-100 transition-opacity"
-        style={{ height: '70px', width: 'auto' }}
-      />
-    </div>
-  </div>
-</section>
+        <section className="py-12 scroll-reveal bg-[#F6F4F1]">
+          <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
+            <p className="font-body text-xs text-stone-500 uppercase tracking-wider font-semibold mb-8">
+              Certified on
+            </p>
+            <div className="flex items-center justify-center gap-6 flex-wrap">
+              <Image
+                src="/images/xero.png"
+                alt="Xero Advisor Certified"
+                width={160}
+                height={80}
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+                style={{ height: '70px', width: 'auto' }}
+              />
+              <Image
+                src="/images/quickbook.png"
+                alt="QuickBooks Online Certified"
+                width={160}
+                height={80}
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+                style={{ height: '70px', width: 'auto' }}
+              />
+            </div>
+          </div>
+        </section>
 
         {/* CTA Section */}
         <CTASection
